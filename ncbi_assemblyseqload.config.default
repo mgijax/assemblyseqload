@@ -1,0 +1,218 @@
+#format: sh
+#
+#  ncbi_assemblyseqload.config.default
+#
+#  This file sets up environment variables that are needed for the
+#  Assembly Sequence Load
+#
+###########################################################################
+
+###########################################################################
+#
+#  GENERAL SETTINGS
+#
+###########################################################################
+
+#  Installation directory for the GenBank sequence load
+INSTALLDIR=/usr/local/mgi/live/dataload/assemblyseqload
+
+export INSTALLDIR DBUTILSDIR RADARDBUTILSDIR 
+
+###########################################################################
+#
+#  DATABASE SETTINGS BY DATABASE
+#
+###########################################################################
+
+# MGD Connection parameters 
+MGD_DBSERVER=PROD_MGI
+#MGD_DBSERVER=DEV1_MGI
+
+MGD_DBURL=shire.informatics.jax.org:4100
+#MGD_DBURL=rohan.informatics.jax.org:4101
+
+MGD_DBNAME=mgd
+#MGD_DBNAME=mgd_sc
+
+MGD_DBUSER=mgd_dbo
+MGD_DBPASSWORDFILE=${DBUTILSDIR}/.mgd_dbo_password
+
+MGD_DBSCHEMADIR=/usr/local/mgi/live/dbutils/mgd/mgddbschema
+
+export MGD_DBSERVER MGD_DBURL MGD_DBNAME
+export MGD_DBUSER MGD_DBPASSWORDFILE MGD_DBSCHEMADIR
+
+# RADAR Connection parameters 
+RADAR_DBSERVER=PROD_MGI
+#RADAR_DBSERVER=DEV1_MGI
+
+RADAR_DBURL=shire.informatics.jax.org:4100
+#RADAR_DBURL=rohan.informatics.jax.org:4101
+
+RADAR_DBNAME=radar
+#RADAR_DBNAME=radar_jsam
+
+RADAR_DBUSER=mgd_dbo
+RADAR_DBPASSWORDFILE=${DBUTILSDIR}/.mgd_dbo_password
+
+RADAR_DBSCHEMADIR=/usr/local/mgi/live/dbutils/radar/radardbschema
+
+export RADAR_DBSERVER RADAR_DBURL RADAR_DBNAME RADAR_DBUSER 
+export RADAR_DBPASSWORDFILE RADAR_DBSCHEMADIR 
+
+###########################################################################
+#
+#  SOFTWARE SETTINGS
+#
+###########################################################################
+
+JAVARUNTIMEOPTS="-Xms1500m -Xmx1500m"
+
+JAVA_LIB=/usr/local/mgi/live/lib/java1.4/lib_java_dla/dla.jar:/usr/local/mgi/live/lib/java1.4/lib_java_core/core.jar:/usr/local/mgi/live/lib/java1.4/lib_java_dbsmgd/dbsmgd.jar:/usr/local/mgi/live/lib/java1.4/lib_java_dbsrdr/dbsrdr.jar
+
+
+CLASSPATH=.:${INSTALLDIR}/assemblyseqload.jar:${JAVA_LIB}:${COMMON_CLASSPATH}
+
+export JAVA_HOME JAVA_RUN JAVA_LIB JAVARUNTIMEOPTS CLASSPATH
+
+###########################################################################
+#
+#  LOAD SPECIFIC SETTINGS
+#
+###########################################################################
+
+#  Java applications
+DLA_LOADER=org.jax.mgi.app.assemblyloader.AssemblySeqloader
+DLA_START=org.jax.mgi.shr.dla.DLAStart
+
+# SQL STREAM
+DLA_DB_PREFIX=MGD
+DLA_LOAD_STREAM=org.jax.mgi.shr.dbutils.dao.BCP_Inline_Stream
+DLA_QC_STREAM=org.jax.mgi.shr.dbutils.dao.BCP_Inline_Stream
+
+export DLA_LOADER DLA_START DLA_LOAD_STREAM DLA_QC_STREAM
+
+# turn off searches for associated clones in the MSProcessor
+MS_OK_TO_SEARCH_ASSOC_CLONES=false
+
+# Full path to dir containing assembly input files - 
+# Note we are using the seqdb_engine release build files
+# if LOAD_MODE=incremental the jobstream determines its own input directory
+INPUTDIR=/mgi/all/wts_projects/5300/5395/data
+
+# Full path the the logs, reports, and archive directories
+FILEDIR=/data/loads/assembly/assemblyseqload
+#FILEDIR=/net/mtdoom/vol/rohan/data/loads/assembly/assemblyseqload
+LOGDIR=${FILEDIR}/logs
+RPTDIR=${FILEDIR}/reports
+ARCHIVEDIR=${FILEDIR}/archive
+OUTPUTDIR=${FILEDIR}/output
+
+export FILEDIR INPUTDIR LOGDIR RPTDIR ARCHIVEDIR OUTPUTDIR
+
+#  Complete path name of the GenBank input file(s)
+#  Frameworks expects the value 'STDIN' if jobstream script pipes input to
+#  the application. Jobstream script expects SEQ_INFILE to be defined
+#  if INFILE_NAME=STDIN
+INFILE_NAME=STDIN
+
+# full path to input files when INFILE_NAME is set to STDIN
+APP_INFILES=${INPUTDIR}/ncbi_build32sc
+
+APP_CAT_METHOD=/usr/bin/cat
+
+export INFILE_NAME APP_INFILES APP_CAT_METHOD 
+
+# buffersize in bytes used by nio.ByteBuffer
+# 21,000,000 = ~20 MB
+INFILE_BUFFERSIZE=21000000
+
+# incremental, incremental_initial, or delete_reload
+# incremental_initial uses no event detections - add only
+SEQ_LOAD_MODE=delete_reload
+
+export INFILE_BUFFERSIZE SEQ_LOAD_MODE APP_RADAR_MAX APP_RADAR_INPUT
+
+# true if a virtual (computationally derived) sequence
+SEQ_VIRTUAL=true
+
+# NCBI sequence type
+SEQ_TYPE=DNA
+
+# NCBI sequence quality
+SEQ_QUALITY=Medium
+
+# this load's MGI_User login value for DB tables CreatedBy and ModifiedBy column
+JOBSTREAM=ncbi_assembly_seqload
+
+# SEQ_Sequence Provider controlled vocab for GenBank 
+SEQ_PROVIDER=NCBI
+
+# logical db name for this data provider
+SEQ_LOGICALDB=NCBI
+
+# the interpreter to use
+SEQ_INTERPRETER=org.jax.mgi.shr.dla.assemblyloader.AssemblyFormatInterpreter
+
+export SEQ_VIRTUAL SEQ_TYPE SEQ_QUALITY JOBSTREAM SEQ_PROVIDER SEQ_LOGICALDB
+export SEQ_INTERPRETER
+
+#  Complete path name of the log files
+LOG_PROC=${LOGDIR}/assemblyseqload.proc.log
+LOG_DIAG=${LOGDIR}/assemblyseqload.diag.log
+LOG_CUR=${LOGDIR}/assemblyseqload.cur.log
+LOG_VAL=${LOGDIR}/assemblyseqload.val.log
+
+# Send debug messages to the diagnostic log
+LOG_DEBUG=false
+
+# logger factory class - allows classes to get their own loggers
+LOG_FACTORY=org.jax.mgi.shr.dla.DLALoggerFactory
+
+export LOG_PROC LOG_DIAG LOG_CUR LOG_VAL LOG_DEBUG LOG_FACTORY
+
+###########################################################################
+#
+#  BCP MANAGER SETTINGS BY DATABASE
+#
+###########################################################################
+
+#  Settings used to create a BCP manager for the MGD database
+MGD_BCP_PATH=${OUTPUTDIR}
+MGD_BCP_PREVENT_EXECUTE=false
+MGD_BCP_TRUNCATE_LOG=true
+MGD_BCP_DROP_INDEXES=true
+MGD_BCP_RECORD_STAMPING=false
+MGD_BCP_AUTO_FLUSH=false
+MGD_BCP_OK_TO_OVERWRITE=true
+
+export MGD_BCP_PATH MGD_BCP_PREVENT_EXECUTE MGD_BCP_TRUNCATE_LOG
+export MGD_BCP_DROP_INDEXES MGD_BCP_RECORD_STAMPING MGD_BCP_AUTO_FLUSH
+export MGD_BCP_OK_TO_OVERWRITE
+
+#  Settings used to create a BCP manager for the RADAR database
+RADAR_BCP_PATH=${OUTPUTDIR}
+RADAR_BCP_PREVENT_EXECUTE=false
+RADAR_BCP_TRUNCATE_LOG=true
+RADAR_BCP_DROP_INDEXES=true
+RADAR_BCP_RECORD_STAMPING=false
+RADAR_BCP_AUTO_FLUSH=true
+RADAR_BCP_OK_TO_OVERWRITE=true
+
+export RADAR_BCP_PATH RADAR_BCP_PREVENT_EXECUTE RADAR_BCP_TRUNCATE_LOG
+export RADAR_BCP_DROP_INDEXES RADAR_BCP_RECORD_STAMPING RADAR_BCP_AUTO_FLUSH
+export RADAR_BCP_OK_TO_OVERWRITE
+
+###########################################################################
+#
+#  MISCELLANEOUS SETTINGS
+#
+###########################################################################
+#  The name of the load for the subject of an email notification
+MAIL_LOADNAME="NCBI Assembly Load"
+
+#  Recipient list for mailing the log files (comma-separated)
+MAIL_LOG_PROC="sc"
+MAIL_LOG_CUR=""
+
+export MAIL_LOADNAME MAIL_LOG_PROC MAIL_LOG_CUR
