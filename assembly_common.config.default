@@ -181,6 +181,10 @@ SEQ_MARKER_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqmarker.csh
 
 # seq/coordinate cache script
 SEQ_COORD_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqcoord.csh
+
+# seq description cache script
+SEQ_MARKER_DESCRIPT_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqdescription.csh
+
 ###########################################################################
 #
 #  BCP MANAGER SETTINGS BY DATABASE
