@@ -1,7 +1,16 @@
+TAG: assemblyseqload-1-0-6
+DATE: 11-17-2004
+STAFF: sc
+RELEASE: dev 3.1
+CHANGES: TR6047 dla refactoring
+1) *.config.defaults - updated with new class package paths
+2) assemblyseqloadcron.sh - commented out call to load ncbi as will not be
+   a part of release
+
 TAG: assemblyseqload-1-0-5
 DATE: 11/04/2004
 STAFF: sc
-RELEASE: alpha build
+RELEASE: alpha build 3.1
 CHANGES: more updates to config defaults
 
 TAG: assemblyseqload-1-0-4
