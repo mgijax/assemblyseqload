@@ -14,7 +14,7 @@
 ###########################################################################
 
 #  Installation directory 
-INSTALLDIR=/usr/local/mgi/live/dataload/assemblyseqload
+INSTALLDIR=${USRLOCALMGI}/dataload/assemblyseqload
 
 export INSTALLDIR
 
@@ -34,9 +34,9 @@ MGD_DBURL=shire.informatics.jax.org:4100
 MGD_DBNAME=mgd
 
 MGD_DBUSER=mgd_dbo
-MGD_DBPASSWORDFILE=${DBUTILSDIR}/.mgd_dbo_password
+MGD_DBPASSWORDFILE=${MGIDBUTILSDIR}/.mgd_dbo_password
 
-MGD_DBSCHEMADIR=/usr/local/mgi/live/dbutils/mgd/mgddbschema
+MGD_DBSCHEMADIR=${MGDDBSCHEMADIR}
 
 export MGD_DBSERVER MGD_DBURL MGD_DBNAME
 export MGD_DBUSER MGD_DBPASSWORDFILE MGD_DBSCHEMADIR
@@ -52,9 +52,9 @@ RADAR_DBNAME=radar
 #RADAR_DBNAME=radar_release
 
 RADAR_DBUSER=mgd_dbo
-RADAR_DBPASSWORDFILE=${DBUTILSDIR}/.mgd_dbo_password
+RADAR_DBPASSWORDFILE=${MGIDBUTILSDIR}/.mgd_dbo_password
 
-RADAR_DBSCHEMADIR=/usr/local/mgi/live/dbutils/radar/radardbschema
+RADAR_DBSCHEMADIR=${RADARDBSCHEMADIR}
 
 export RADAR_DBSERVER RADAR_DBURL RADAR_DBNAME RADAR_DBUSER 
 export RADAR_DBPASSWORDFILE RADAR_DBSCHEMADIR 
@@ -67,8 +67,7 @@ export RADAR_DBPASSWORDFILE RADAR_DBSCHEMADIR
 
 JAVARUNTIMEOPTS="-Xms1500m -Xmx1500m"
 
-JAVA_LIB=/usr/local/mgi/live/lib/java/lib_java_dla/dla.jar:/usr/local/mgi/live/lib/java/lib_java_core/core.jar:/usr/local/mgi/live/lib/java/lib_java_dbsmgd/dbsmgd.jar:/usr/local/mgi/live/lib/java/lib_java_dbsrdr/dbsrdr.jar
-
+JAVA_LIB=${JAVAPATH}/lib_java_dla/dla.jar:${JAVAPATH}/lib_java_core/core.jar:${JAVAPATH}/lib_java_dbsmgd/dbsmgd.jar:${JAVAPATH}/lib_java_dbsrdr/dbsrdr.jar
 
 CLASSPATH=.:${JAVA_LIB}:${COMMON_CLASSPATH}
 
@@ -174,8 +173,8 @@ ASSEMBLY_CACHELOAD=/usr/local/mgi/live/dbutils/assemblycacheload/processfile.csh
 #ASSEMBLY_CACHELOAD=/home/sc/jsam/assemblycacheload/processfile.csh
 
 # seqcacheload directory
-#SEQ_CACHELOAD_DIR=/home/sc/jsam/seqcacheload
 SEQ_CACHELOAD_DIR=/usr/local/mgi/live/dbutils/seqcacheload
+#SEQ_CACHELOAD_DIR=/home/sc/jsam/seqcacheload
 
 # seq/marker cache script
 SEQ_MARKER_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqmarker.csh
@@ -221,7 +220,7 @@ export RADAR_BCP_OK_TO_OVERWRITE
 ###########################################################################
 
 #  Recipient list for mailing the log files (comma-separated)
-MAIL_LOG_PROC="sc"
-MAIL_LOG_CUR="sc"
+MAIL_LOG_PROC="sc,lec"
+MAIL_LOG_CUR=""
 
 export MAIL_LOG_PROC MAIL_LOG_CUR
