@@ -152,7 +152,7 @@ SEQ_PROVIDER=NCBI
 SEQ_LOGICALDB=NCBI
 
 # the interpreter to use
-SEQ_INTERPRETER=org.jax.mgi.shr.dla.assemblyloader.AssemblyFormatInterpreter
+SEQ_INTERPRETER=org.jax.mgi.shr.dla.assemblyloader.MGSAssemblyFormatInterpreter
 
 export SEQ_VIRTUAL SEQ_TYPE SEQ_QUALITY JOBSTREAM SEQ_PROVIDER SEQ_LOGICALDB
 export SEQ_INTERPRETER
