@@ -169,12 +169,12 @@ export COORD_DLA_LOADER COORD_TYPE COORD_UNITS COORD_REPEAT_FILE
 ###########################################################################
 
 # assemblycacheload
-ASSEMBLY_CACHELOAD=/usr/local/mgi/live/dbutils/assemblycacheload/processfile.csh
-#ASSEMBLY_CACHELOAD=/home/sc/jsam/assemblycacheload/processfile.csh
+ASSEMBLY_CACHELOAD=${USRLOCALMGI}/dbutils/assemblycacheload/processfile.csh
+#ASSEMBLY_CACHELOAD=${USRLOCALMGI}/assemblycacheload/processfile.csh
 
 # seqcacheload directory
-SEQ_CACHELOAD_DIR=/usr/local/mgi/live/dbutils/seqcacheload
-#SEQ_CACHELOAD_DIR=/home/sc/jsam/seqcacheload
+SEQ_CACHELOAD_DIR=${USRLOCALMGI}/dbutils/seqcacheload
+#SEQ_CACHELOAD_DIR=${USRLOCALMGI}/seqcacheload
 
 # seq/marker cache script
 SEQ_MARKER_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqmarker.csh
