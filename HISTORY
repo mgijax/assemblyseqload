@@ -1,6 +1,29 @@
+TAG: assemblyseqload-1-0-3
+DATE: 10/22/2004
+STAFF: sc
+RELEASE: dev build
+CHANGES:
+1) ensemb and ncbi config.defaults - changed name of interpreter
+   (I renamed the class)
+
+TAG: assemblyseqload-1-0-2
+DATE: 10/19/2004
+STAFF: sc
+RELEASE: dev build
+CHANGES:
+1) assembly_common.config.defaults replaced all BCP_Inline_Stream configuration
+   with BCP_STREAM
+
+
+TAG: assemblyseqload-1-0-1
+DATE: 10/19/2004
+STAFF: sc
+RELEASE: dev build
+CHANGES: 
+
 TAG: assemblyseqload-1-0-0
 DATE: 07/27/2004
 STAFF: sc
 RELEASE:
-CHANGES: initial tag 
+CHANGES: TR5395 initial tag 
 
