@@ -38,8 +38,8 @@ fi
 # run the assembly loads
 #
 
-echo "Running assembly sequence loads" | tee ${LOG}
-date
+echo "Running assembly sequence loads" | tee -a ${LOG}
+date | tee  -a ${LOG}
 assemblyseqload.sh ensembl_assemblyseqload.config
 #assemblyseqload.sh ncbi_assemblyseqload.config
 
@@ -47,9 +47,16 @@ assemblyseqload.sh ensembl_assemblyseqload.config
 # run the cache loads
 #
 
-echo "Running cache loads" | tee ${LOG}
-date
+echo "Running seq/marker cacheload" | tee -a ${LOG}
+date | tee -a ${LOG}
 ${SEQ_MARKER_CACHELOAD}
+
+echo "Running seq/coordinate cacheload" | tee -a ${LOG}
+date | tee -a ${LOG}
 ${SEQ_COORD_CACHELOAD}
 
-date | tee ${LOG}
+echo "Running seq description cacheload" | tee -a ${LOG}
+date | tee -a ${LOG}
+${SEQ_MARKER_DESCRIPT_CACHELOAD}
+
+date | tee -a ${LOG}
