@@ -258,7 +258,7 @@ then
     shutDown
     exit 1
 fi
-echo "assemblycacheload completed successfully" | tee -a  ${LOG_PROC}
+echo "assemblycacheload completed successfully" | tee -a  ${LOG_DIAG} ${LOG_PROC} 
 
 #
 # run postload cleanup and email logs
