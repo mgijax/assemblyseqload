@@ -1,3 +1,11 @@
+TAG: assemblyseqload-1-0-4
+DATE: 11/04/2004
+STAFF: sc
+RELEASE: alpha build
+CHANGES:
+1) assembly_common.config.default and ensembl_assemblyseqload.config.default -
+   changed some default values
+
 TAG: assemblyseqload-1-0-3
 DATE: 10/22/2004
 STAFF: sc
