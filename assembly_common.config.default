@@ -82,7 +82,7 @@ export JAVARUNTIMEOPTS JAVA_LIB CLASSPATH
 
 # SQL STREAM
 DLA_DB_PREFIX=MGD
-DLA_LOAD_STREAM=org.jax.mgi.shr.dbutils.dao.BCP_Inline_Stream
+DLA_LOAD_STREAM=org.jax.mgi.shr.dbutils.dao.BCP_Stream
 DLA_QC_STREAM=org.jax.mgi.shr.dbutils.dao.BCP_Stream
 
 export DLA_DB_PREFIX DLA_LOAD_STREAM DLA_QC_STREAM
