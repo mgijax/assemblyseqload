@@ -1,0 +1,132 @@
+#format: sh
+#
+#  ensembl_assemblyseqload.config.default
+#
+#  This file sets up environment variables that are needed for the
+#  Ensembl Assembly Sequence and Coordinate Loads
+#
+###########################################################################
+
+
+###########################################################################
+#
+#  LOAD SPECIFIC SETTINGS
+#
+###########################################################################
+
+# Full path to dir containing assembly input files - 
+INPUTDIR=/mgi/all/wts_projects/5300/5395/data
+
+# Full path the the logs, reports, and archive directories
+FILEDIR=/data/loads/assembly/ncbiseqload
+
+#  Complete path name of the ensembl input file
+INFILE_NAME=${INPUTDIR}/ensembl_build32
+
+export INPUTDIR FILEDIR INFILE_NAME 
+
+###########################################################################
+#
+#  ensembl assemblyseqload settings
+#
+###########################################################################
+
+# true if a virtual (computationally derived) sequence
+SEQ_VIRTUAL=true
+
+# sequence type
+SEQ_TYPE=DNA
+
+# sequence quality
+SEQ_QUALITY=Medium
+
+# jnumber for the sequence load load
+SEQ_JNUMBER=J:91388
+
+export SEQ_VIRTUAL SEQ_TYPE SEQ_QUALITY SEQ_JNUMBER
+
+# source information
+SEQ_ORGANISM="mouse, laboratory"
+SEQ_STRAIN=C57BL/6J
+SEQ_TISSUE="Not Specified"
+SEQ_AGE="Not Specified"
+SEQ_GENDER=Pooled
+SEQ_CELLLINE="Not Specified"
+
+export SEQ_ORGANISM SEQ_STRAIN SEQ_TISSUE SEQ_AGE SEQ_GENDER SEQ_CELLLINE
+
+# release date
+SEQ_RELEASE_DATE=2004/07/26
+
+# for the sequence version attribute
+SEQ_RELEASE_NO=19.32.2
+
+# MGI_User login value for DB tables CreatedBy and ModifiedBy column
+JOBSTREAM=ensembl_assemblyseqload
+
+# SEQ_Sequence Provider controlled vocab 
+SEQ_PROVIDER="Ensembl Gene Model"
+
+# logical db name for this data provider
+SEQ_LOGICALDB="Ensembl Gene Model"
+
+# the interpreter to use
+SEQ_INTERPRETER=org.jax.mgi.shr.dla.assemblyloader.MGSAssemblyFormatInterpreter
+
+export SEQ_RELEASE_NO SEQ_RELEASE_NO JOBSTREAM SEQ_PROVIDER SEQ_LOGICALDB
+export SEQ_INTERPRETER
+
+############################################################################
+#
+# ensembl coordload settings
+#
+###########################################################################
+
+# Java classes
+COORD_INTERPRETER=org.jax.mgi.shr.dla.coordloader.MGSCoordMapFormatInterpreter
+COORD_PROCESSOR=org.jax.mgi.shr.dla.coordloader.ChromosomeCoordMapProcessor
+
+export COORD_INTERPRETER COORD_PROCESSOR 
+
+# logical db name for this data provider
+COORD_LOGICALDB=${SEQ_LOGICALDB}
+
+# name of organism whose coordinates we are loading
+COORD_ORGANISM=${SEQ_ORGANISM}
+
+# version of the coordinate load
+COORD_VERSION="NCBI Build 32"
+
+# coordinate map collection to which this load belongs
+COORD_COLLECTION_NAME="Ensembl Gene Model"
+
+# abbreviation for the coordinate collection
+# if no value assigned will be same as COORD_COLLECTION
+COORD_COLLECTION_ABBREV=
+
+# MGI type name of the feature
+COORD_FEATURE_MGITYPE=Sequence
+
+export COORD_LOGICALDB COORD_ORGANISM COORD_VERSION
+export COORD_COLLECTION_NAME COORD_COLLECTION_ABBREV COORD_FEATURE_MGITYPE
+
+############################################################################
+#
+# ensembl assemblycacheload settings
+#
+###########################################################################
+
+# name of the ensembl config file for assemblycacheload
+ASSEMBLY_CACHELOAD_CONFIG=ensembl.config
+
+export ASSEMBLY_CACHELOAD_CONFIG
+
+###########################################################################
+#
+#  MISCELLANEOUS SETTINGS
+#
+###########################################################################
+#  The name of the load for the subject of an email notification
+MAIL_LOADNAME="Ensembl Assembly Load"
+
+export MAIL_LOADNAME 
