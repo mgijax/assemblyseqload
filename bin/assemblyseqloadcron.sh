@@ -38,7 +38,7 @@ fi
 echo "Running assembly sequence loads"
 date
 assemblyseqload.sh ensembl_assemblyseqload.config
-assemblyseqload.sh ncbi_assemblyseqload.config
+#assemblyseqload.sh ncbi_assemblyseqload.config
 
 #
 # run the cache loads
