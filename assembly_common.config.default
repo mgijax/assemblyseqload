@@ -170,10 +170,12 @@ export COORD_DLA_LOADER COORD_TYPE COORD_UNITS COORD_REPEAT_FILE
 ###########################################################################
 
 # assemblycacheload
-ASSEMBLY_CACHELOAD=/home/sc/jsam/assemblycacheload/processfile.csh
+ASSEMBLY_CACHELOAD=/usr/local/mgi/live/dbutils/assemblycacheload/processfile.csh
+#ASSEMBLY_CACHELOAD=/home/sc/jsam/assemblycacheload/processfile.csh
 
 # seqcacheload directory
-SEQ_CACHELOAD_DIR=/home/sc/jsam/seqcacheload
+#SEQ_CACHELOAD_DIR=/home/sc/jsam/seqcacheload
+SEQ_CACHELOAD_DIR=/usr/local/mgi/live/dbutils/seqcacheload
 
 # seq/marker cache script
 SEQ_MARKER_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqmarker.csh
@@ -193,7 +195,7 @@ MGD_BCP_TRUNCATE_LOG=true
 MGD_BCP_DROP_INDEXES=false
 MGD_BCP_RECORD_STAMPING=false
 MGD_BCP_AUTO_FLUSH=false
-MGD_BCP_OK_TO_OVERWRITE=true
+MGD_BCP_OK_TO_OVERWRITE=false
 
 export MGD_BCP_PATH MGD_BCP_PREVENT_EXECUTE MGD_BCP_TRUNCATE_LOG
 export MGD_BCP_DROP_INDEXES MGD_BCP_RECORD_STAMPING MGD_BCP_AUTO_FLUSH
@@ -206,7 +208,7 @@ RADAR_BCP_TRUNCATE_LOG=true
 RADAR_BCP_DROP_INDEXES=false
 RADAR_BCP_RECORD_STAMPING=false
 RADAR_BCP_AUTO_FLUSH=true
-RADAR_BCP_OK_TO_OVERWRITE=true
+RADAR_BCP_OK_TO_OVERWRITE=false
 
 export RADAR_BCP_PATH RADAR_BCP_PREVENT_EXECUTE RADAR_BCP_TRUNCATE_LOG
 export RADAR_BCP_DROP_INDEXES RADAR_BCP_RECORD_STAMPING RADAR_BCP_AUTO_FLUSH

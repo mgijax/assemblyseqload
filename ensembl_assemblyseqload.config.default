@@ -18,7 +18,7 @@
 INPUTDIR=/mgi/all/wts_projects/5300/5395/data
 
 # Full path the the logs, reports, and archive directories
-FILEDIR=/data/loads/assembly/ncbiseqload
+FILEDIR=/data/loads/assembly/ensemblseqload
 
 #  Complete path name of the ensembl input file
 INFILE_NAME=${INPUTDIR}/ensembl_build32
