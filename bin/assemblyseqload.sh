@@ -62,6 +62,7 @@ fi
 #  Establish the configuration file names.
 #
 CONFIG_COMMON=`pwd`/common.config.sh
+CONFIG_LOAD_COMMON=`pwd`/assembly_common.config
 CONFIG_LOAD=`pwd`/$1
 
 echo ${CONFIG_LOAD}
@@ -69,11 +70,18 @@ echo ${CONFIG_LOAD}
 #
 #  Make sure the configuration files are readable.
 #
+if [ ! -r ${CONFIG_LOAD_COMMON} ]
+then
+    echo "Cannot read configuration file: ${CONFIG_LOAD_COMMON}"
+    exit 1
+fi
+
 if [ ! -r ${CONFIG_COMMON} ]
 then
     echo "Cannot read configuration file: ${CONFIG_COMMON}"
     exit 1
 fi
+
 if [ ! -r ${CONFIG_LOAD} ]
 then
     echo "Cannot read configuration file: ${CONFIG_LOAD}"
@@ -85,6 +93,7 @@ fi
 #
 . $CONFIG_COMMON
 . $CONFIG_LOAD
+. ${CONFIG_LOAD_COMMON}
 
 echo "javaruntime:${JAVARUNTIMEOPTS}"
 echo "classpath:${CLASSPATH}"
@@ -108,6 +117,27 @@ else
     exit 1
 fi
 
+# check that INFILE_NAME has been set
+if [ "${INFILE_NAME}" = "" ]
+then
+     # set STAT for endJobStream.py called from postload in shutDown
+    STAT=1
+    echo "INFILE_NAME not defined. Return status: ${STAT}" | \
+        tee -a ${LOG_DIAG}
+    shutDown
+    exit 1
+fi
+
+
+if [ ! -r ${INFILE_NAME} ]
+then
+    # set STAT for endJobStream.py called from postload in shutDown
+    STAT=1
+    echo "Cannot read from input file: ${INFILE_NAME}" | tee -a ${LOG}
+    shutDown
+    exit 1
+fi
+
 #
 #  Function that performs cleanup tasks for the job stream prior to
 #  termination.
@@ -125,46 +155,102 @@ shutDown ()
     postload
 
 }
-# check that APP_INFILES has been set
-if [ "${APP_INFILES}" = "" ]
-then
-     # set STAT for endJobStream.py called from postload in shutDown
-    STAT=1
-    echo "APP_INFILES not defined. Return status: ${STAT}" | \
-        tee -a ${LOG_DIAG}
-    shutDown
-    exit 1
-fi
+
+##################################################################
+##################################################################
+#
+# main
+#
+##################################################################
+##################################################################
 
 #
-# call the dla preload routine
-#
-preload
-
-#
-# run the load
+# createArchive including OUTPUTDIR, startLog, getConfigEnv, get job key
 #
 
-# log the file being processed 
+preload ${OUTPUTDIR}
+
+#
+# rm files and dirs from OUTPUTDIR and RPTDIR
+#
+
+cleanDir ${OUTPUTDIR} ${RPTDIR}
+
+#
+# Run the assembly sequence load
+#
+
+echo "Running assemblyseqload" | tee -a ${LOG_DIAG} ${LOG_PROC}
+
+
+# log time and input files to process
 echo "\n`date`" >> ${LOG_PROC}
-echo "Files read from stdin: ${APP_CAT_METHOD} ${APP_INFILES}" | \
+
+echo "Processing input file ${INFILE_NAME}" | \
     tee -a ${LOG_DIAG} ${LOG_PROC}
 
-${APP_CAT_METHOD}  ${APP_INFILES}  | \
+# run the load
+
 ${JAVA} ${JAVARUNTIMEOPTS} -classpath ${CLASSPATH} \
--DCONFIG=${CONFIG_COMMON},${CONFIG_LOAD} \
+-DCONFIG=${CONFIG_COMMON},${CONFIG_LOAD},${CONFIG_LOAD_COMMON} \
 -DJOBKEY=${JOBKEY} ${DLA_START}
 
 STAT=$?
 if [ ${STAT} -ne 0 ]
 then
-    echo "assemblyrseqload failed.  Return status: ${STAT}" >> ${LOG_PROC}
+    echo "assemblyseqload processing failed.  \
+        Return status: ${STAT}" >> ${LOG_PROC}
     shutDown
     exit 1
 fi
-
-# Report success and location of the logs
 echo "assemblyseqload completed successfully" >> ${LOG_PROC}
+
+#
+# Run the assembly coordinate load
+#
+
+echo "Running coordload" | tee -a ${LOG_DIAG} ${LOG_PROC}
+
+# log time and input files to process
+echo "\n`date`" >> ${LOG_PROC}
+
+echo "Processing input file ${INFILE_NAME}" | \
+    tee -a ${LOG_DIAG} ${LOG_PROC}
+
+# Here we override the Configured value of DLA_LOADER
+# and set it to the Configured coordload class
+${JAVA} ${JAVARUNTIMEOPTS} -classpath ${CLASSPATH} \
+-DCONFIG=${CONFIG_COMMON},${CONFIG_LOAD},${CONFIG_LOAD_COMMON} \
+-DDLA_LOADER=${COORD_DLA_LOADER} \
+-DJOBKEY=${JOBKEY} ${DLA_START}
+
+STAT=$?
+if [ ${STAT} -ne 0 ]
+then
+    echo "coordload processing failed.  \
+        Return status: ${STAT}" >> ${LOG_PROC}
+    shutDown
+    exit 1
+fi
+echo "coordload completed successfully" >> ${LOG_PROC}
+
+#
+# run the assemblycacheload 
+#
+echo "Running the assembly cache load" | tee -a ${LOG_DIAG} ${LOG_PROC}
+echo "\n`date`" >> ${LOG_PROC}
+
+${ASSEMBLY_CACHELOAD} ${ASSEMBLY_CACHELOAD_CONFIG}
+
+STAT=$?
+if [ ${STAT} -ne 0 ]
+then
+    echo "assemblycacheload processing failed.  \
+        Return status: ${STAT}" >> ${LOG_PROC}
+    shutDown
+    exit 1
+fi
+echo "assemblycacheload completed successfully" | tee -a  ${LOG_PROC}
 
 #
 # run postload cleanup and email logs
