@@ -45,6 +45,12 @@
 #  Notes:  None
 #
 ###########################################################################
+
+#
+#  Set up a log file for the shell script in case there is an error
+#  during configuration and initialization.
+#
+
 cd `dirname $0`/..
 LOG=`pwd`/assemblyseqload.log
 rm -f ${LOG}
@@ -95,6 +101,7 @@ fi
 . $CONFIG_LOAD
 . ${CONFIG_LOAD_COMMON}
 
+# reality check for important configuration vars
 echo "javaruntime:${JAVARUNTIMEOPTS}"
 echo "classpath:${CLASSPATH}"
 echo "dbserver:${MGD_DBSERVER}"
@@ -117,7 +124,9 @@ else
     exit 1
 fi
 
-# check that INFILE_NAME has been set
+#
+# check that INFILE_NAME has been set and readable
+#
 if [ "${INFILE_NAME}" = "" ]
 then
      # set STAT for endJobStream.py called from postload in shutDown
@@ -127,7 +136,6 @@ then
     shutDown
     exit 1
 fi
-
 
 if [ ! -r ${INFILE_NAME} ]
 then
