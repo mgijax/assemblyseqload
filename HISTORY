@@ -1,3 +1,14 @@
+TAG: assemblyseqload-1-0-9
+DATE: 12-06-2004
+STAFF: sc
+RELEASE: dev 3.1
+CHANGES: tr6336
+1) assemblyseqloadcron.sh - added sourcing of common.config.sh because of
+   factoring out USRLOCALMGI
+2) assemblyseqloadcron.sh - added call to seqcacheload seqdescription.csh
+3) assemblyseqloadcron.sh - added checking STAT of each script run.
+4) assembly_common.config.default - added SEQ_MARKER_DESCRIPT_CACHELOAD
+
 TAG: assemblyseqload-1-0-8
 DATE: 11-22-2004
 STAFF: sc
