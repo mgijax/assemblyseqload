@@ -110,7 +110,7 @@ CACHE_DEBUG=false
 DBDEBUG=false
 
 # logger factory class - allows classes to get their own loggers
-LOG_FACTORY=org.jax.mgi.shr.dla.DLALoggerFactory
+LOG_FACTORY=org.jax.mgi.shr.dla.log.DLALoggerFactory
 
 export LOG_DEBUG CACHE_DEBUG DBDEBUG LOG_FACTORY
 
@@ -121,8 +121,8 @@ export LOG_DEBUG CACHE_DEBUG DBDEBUG LOG_FACTORY
 ###########################################################################
 
 #  Java classes
-DLA_LOADER=org.jax.mgi.shr.dla.assemblyloader.AssemblySeqloader
-DLA_START=org.jax.mgi.shr.dla.DLAStart
+DLA_LOADER=org.jax.mgi.shr.dla.loader.seq.AssemblySeqloader
+DLA_START=org.jax.mgi.shr.dla.loader.DLAStart
 
 export DLA_LOADER DLA_START
 
@@ -150,7 +150,7 @@ export SEQ_REPEAT_FILE
 ###########################################################################
 
 # Java classes
-COORD_DLA_LOADER=org.jax.mgi.shr.dla.coordloader.CoordLoader
+COORD_DLA_LOADER=org.jax.mgi.shr.dla.loader.coord.CoordLoader
 
 # coordinate map type
 COORD_TYPE=Assembly

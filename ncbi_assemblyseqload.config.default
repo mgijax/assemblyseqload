@@ -71,7 +71,7 @@ SEQ_PROVIDER="NCBI Gene Model"
 SEQ_LOGICALDB="NCBI Gene Model"
 
 # the interpreter to use
-SEQ_INTERPRETER=org.jax.mgi.shr.dla.assemblyloader.MGSAssemblyFormatInterpreter
+SEQ_INTERPRETER=org.jax.mgi.shr.dla.input.mgs.MGSAssemblyFormatInterpreter
 
 export SEQ_RELEASE_DATE SEQ_RELEASE_NO JOBSTREAM SEQ_PROVIDER SEQ_LOGICALDB
 export SEQ_INTERPRETER
@@ -83,8 +83,8 @@ export SEQ_INTERPRETER
 ###########################################################################
 
 # Java classes
-COORD_INTERPRETER=org.jax.mgi.shr.dla.coordloader.MGSCoordinateFormatInterpreter
-COORD_PROCESSOR=org.jax.mgi.shr.dla.coordloader.ChromosomeCoordMapProcessor
+COORD_INTERPRETER=org.jax.mgi.shr.dla.input.mgs.MGSCoordinateFormatInterpreter
+COORD_PROCESSOR=org.jax.mgi.dbs.mgd.loads.Coord.ChromosomeCoordMapProcessor
 
 export COORD_INTERPRETER COORD_PROCESSOR
 
