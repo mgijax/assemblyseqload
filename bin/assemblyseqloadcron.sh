@@ -40,22 +40,69 @@ fi
 
 echo "Running assembly sequence loads" | tee -a ${LOG}
 assemblyseqload.sh ensembl_assemblyseqload.config
+
+STAT=$?
+if [ ${STAT} -ne 0 ]
+then
+    exit 1
+fi
+
 #assemblyseqload.sh ncbi_assemblyseqload.config
+
+#STAT=$?
+#if [ ${STAT} -ne 0 ]
+#then
+#    exit 1
+#fi
+
+echo "assemblyseqloads completed successfully" | tee -a ${LOG}
 
 #
 # run the cache loads
 #
 
-date | tee -a ${LOG}
-echo "Running seq/marker cacheload" | tee -a ${LOG}
+date | tee -a ${LOG} 
+echo "Running ${SEQ_MARKER_CACHELOAD}" | tee -a ${LOG} 
 ${SEQ_MARKER_CACHELOAD}
 
-date | tee -a ${LOG}
-echo "Running seq/coordinate cacheload" | tee -a ${LOG}
+STAT=$?
+if [ ${STAT} -ne 0 ]
+then
+    echo "${SEQ_MARKER_CACHELOAD} processing failed.  \
+        Return status: ${STAT}" | tee -a ${LOG} 
+    exit 1
+fi
+echo "${SEQ_MARKER_CACHELOAD} completed successfully" | tee -a  ${LOG} 
+
+
+date | tee -a ${LOG} 
+echo "Running ${SEQ_COORD_CACHELOAD}" | tee -a ${LOG} 
 ${SEQ_COORD_CACHELOAD}
 
-date | tee -a ${LOG}
-echo "Running seq description cacheload" | tee -a ${LOG}
+STAT=$?
+if [ ${STAT} -ne 0 ]
+then
+    # If SEQ_COORD_CACHELOAD fails SEQ_MARKER_DESCRIPT_CACHELOAD 
+    # can still execute
+    echo "${SEQ_COORD_CACHELOAD} processing failed.  \
+        Return status: ${STAT}" | tee -a ${LOG} 
+else
+    echo "${SEQ_COORD_CACHELOAD} completed successfully" | tee -a  ${LOG}
+fi
+
+
+date | tee -a ${LOG} 
+echo "Running ${SEQ_MARKER_DESCRIPT_CACHELOAD}" | tee -a ${LOG} 
 ${SEQ_MARKER_DESCRIPT_CACHELOAD}
 
-date | tee -a ${LOG}
+STAT=$?
+if [ ${STAT} -ne 0 ]
+then
+    echo "${SEQ_MARKER_DESCRIPT_CACHELOAD} processing failed.  \
+        Return status: ${STAT}"  | tee -a ${LOG} 
+    exit 1
+fi
+
+echo "${SEQ_MARKER_DESCRIPT_CACHELOAD} completed successfully" | tee -a  ${LOG}
+
+date | tee -a ${LOG} 
