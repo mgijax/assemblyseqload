@@ -83,7 +83,7 @@ export SEQ_INTERPRETER
 ###########################################################################
 
 # Java classes
-COORD_INTERPRETER=org.jax.mgi.shr.dla.coordloader.MGSCoordMapFormatInterpreter
+COORD_INTERPRETER=org.jax.mgi.shr.dla.coordloader.MGSCoordinateFormatInterpreter
 COORD_PROCESSOR=org.jax.mgi.shr.dla.coordloader.ChromosomeCoordMapProcessor
 
 export COORD_INTERPRETER COORD_PROCESSOR 
