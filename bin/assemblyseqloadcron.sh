@@ -19,6 +19,9 @@ rm -f ${LOG}
 
 date | tee ${LOG}
 
+# source the common configuration
+. ../common.config.sh
+
 # source the common assembly load configuration
 . ../assembly_common.config
 
