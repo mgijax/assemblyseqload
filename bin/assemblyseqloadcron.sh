@@ -17,7 +17,7 @@ cd `dirname $0`
 LOG=`pwd`/assemblyseqloadcron.log
 rm -f ${LOG}
 
-date
+date | tee ${LOG}
 
 # source the common assembly load configuration
 . ../assembly_common.config
@@ -35,7 +35,7 @@ fi
 # run the assembly loads
 #
 
-echo "Running assembly sequence loads"
+echo "Running assembly sequence loads" | tee ${LOG}
 date
 assemblyseqload.sh ensembl_assemblyseqload.config
 #assemblyseqload.sh ncbi_assemblyseqload.config
@@ -44,8 +44,9 @@ assemblyseqload.sh ensembl_assemblyseqload.config
 # run the cache loads
 #
 
-echo "Running cache loads"
+echo "Running cache loads" | tee ${LOG}
 date
 ${SEQ_MARKER_CACHELOAD}
 ${SEQ_COORD_CACHELOAD}
-date
+
+date | tee ${LOG}
