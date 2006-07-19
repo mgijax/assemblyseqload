@@ -159,8 +159,9 @@ COORD_UNITS="base pair"
 
 # full path to coordinate repeat file
 COORD_REPEAT_FILE=${OUTPUTDIR}/coordrepeats.out
+COORD_REPEATS_OK=false
 
-export COORD_DLA_LOADER COORD_TYPE COORD_UNITS COORD_REPEAT_FILE
+export COORD_DLA_LOADER COORD_TYPE COORD_UNITS COORD_REPEAT_FILE COORD_REPEATS_OK
 
 ############################################################################
 #

@@ -15,13 +15,13 @@
 ###########################################################################
 
 # Full path to dir containing assembly input files - 
-INPUTDIR=/mgi/all/wts_projects/5300/5395/data
+INPUTDIR=/mgi/all/wts_projects/7600/7655/data
 
 # Full path the the logs, reports, and archive directories
 FILEDIR=/data/loads/assembly/ensemblseqload
 
 #  Complete path name of the ensembl input file
-INFILE_NAME=${INPUTDIR}/ensembl_build33
+INFILE_NAME=${INPUTDIR}/ensembl_build36
 
 export INPUTDIR FILEDIR INFILE_NAME 
 

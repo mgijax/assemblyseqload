@@ -245,20 +245,20 @@ echo "coordload completed successfully" >> ${LOG_PROC}
 #
 # run the assemblycacheload 
 #
-echo "Running the assembly cache load" | tee -a ${LOG_DIAG} ${LOG_PROC}
-echo "\n`date`" >> ${LOG_PROC}
+#echo "Running the assembly cache load" | tee -a ${LOG_DIAG} ${LOG_PROC}
+#echo "\n`date`" >> ${LOG_PROC}
 
-${ASSEMBLY_CACHELOAD} ${ASSEMBLY_CACHELOAD_CONFIG}
+#${ASSEMBLY_CACHELOAD} ${ASSEMBLY_CACHELOAD_CONFIG}
 
-STAT=$?
-if [ ${STAT} -ne 0 ]
-then
-    echo "assemblycacheload processing failed.  \
-        Return status: ${STAT}" >> ${LOG_PROC}
-    shutDown
-    exit 1
-fi
-echo "assemblycacheload completed successfully" | tee -a  ${LOG_DIAG} ${LOG_PROC} 
+#STAT=$?
+#if [ ${STAT} -ne 0 ]
+#then
+#    echo "assemblycacheload processing failed.  \
+#        Return status: ${STAT}" >> ${LOG_PROC}
+#    shutDown
+#    exit 1
+#fi
+#echo "assemblycacheload completed successfully" | tee -a  ${LOG_DIAG} ${LOG_PROC} 
 
 #
 # run postload cleanup and email logs
