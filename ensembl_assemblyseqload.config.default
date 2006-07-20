@@ -21,7 +21,7 @@ INPUTDIR=/mgi/all/wts_projects/7600/7655/data
 FILEDIR=/data/loads/assembly/ensemblseqload
 
 #  Complete path name of the ensembl input file
-INFILE_NAME=${INPUTDIR}/ensembl_build36
+INFILE_NAME=${INPUTDIR}/ensemblgenemodels.txt
 
 export INPUTDIR FILEDIR INFILE_NAME 
 
