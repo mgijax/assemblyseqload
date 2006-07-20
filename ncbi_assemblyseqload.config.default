@@ -78,7 +78,7 @@ export SEQ_INTERPRETER
 
 ############################################################################
 #
-# ensembl coordload settings
+# ncbi coordload settings
 #
 ###########################################################################
 
@@ -122,7 +122,7 @@ export COORD_REPEAT_FILE
 #
 ###########################################################################
 
-# name of the ensembl config file for assemblycacheload
+# name of the ncbi config file for assemblycacheload
 ASSEMBLY_CACHELOAD_CONFIG=ncbi.config
 
 export ASSEMBLY_CACHELOAD_CONFIG

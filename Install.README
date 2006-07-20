@@ -8,5 +8,5 @@ To Install assemblyseqload:
 
 A typical Install is done from assemblyseqload root directory 
 Using ncbi as an example as follows:
-/usr/local/mgi/live/dbutils/dlautils/DLAInstall /usr/local/mgi/live/etc/common.config.sh ncbi_assemblyseqload.config  assembly_common.config
+${USRLOCALMGI}/dbutils/dlautils/DLAInstall ${USRLOCALMGI}/etc/common.config.sh ncbi_assemblyseqload.config  assembly_common.config
 

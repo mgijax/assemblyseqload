@@ -38,7 +38,7 @@ SEQ_VIRTUAL=true
 SEQ_TYPE=DNA
 
 # sequence quality
-SEQ_QUALITY=Medium
+SEQ_QUALITY=High
 
 # jnumber for the sequence load load
 SEQ_JNUMBER=J:91388
@@ -56,10 +56,10 @@ SEQ_CELLLINE="Not Specified"
 export SEQ_ORGANISM SEQ_STRAIN SEQ_TISSUE SEQ_AGE SEQ_GENDER SEQ_CELLLINE
 
 # release date
-SEQ_RELEASE_DATE=2004/09/03
+SEQ_RELEASE_DATE=2006/05/06
 
 # for the sequence version attribute
-SEQ_RELEASE_NO=26.33b.1
+SEQ_RELEASE_NO=Build.36
 
 # MGI_User login value for DB tables CreatedBy and ModifiedBy column
 JOBSTREAM=ensembl_assemblyseqload
@@ -95,7 +95,7 @@ COORD_LOGICALDB=${SEQ_LOGICALDB}
 COORD_ORGANISM=${SEQ_ORGANISM}
 
 # version of the coordinate load
-COORD_VERSION="NCBI Build 33"
+COORD_VERSION="NCBI Build 36"
 
 # coordinate map collection to which this load belongs
 COORD_COLLECTION_NAME="Ensembl Gene Model"
