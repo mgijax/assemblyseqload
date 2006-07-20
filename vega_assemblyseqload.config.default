@@ -3,7 +3,7 @@
 #  vega_assemblyseqload.config.default
 #
 #  This file sets up environment variables that are needed for the
-#  NCBI Assembly Sequence Load and Coordinate Loads
+#  VEGA Assembly Sequence Load and Coordinate Loads
 #
 ###########################################################################
 
@@ -34,10 +34,10 @@ export INPUTDIR FILEDIR INFILE_NAME
 # true if a virtual (computationally derived) sequence
 SEQ_VIRTUAL=true
 
-# NCBI sequence type
+# VEGA sequence type
 SEQ_TYPE=DNA
 
-# NCBI sequence quality
+# VEGA sequence quality
 SEQ_QUALITY=High
 
 # jnumber
@@ -55,7 +55,7 @@ SEQ_CELLLINE="Not Specified"
 
 export SEQ_ORGANISM SEQ_STRAIN SEQ_TISSUE SEQ_AGE SEQ_GENDER SEQ_CELLLINE
 
-# NCBI release date
+# VEGA release date
 SEQ_RELEASE_DATE=2006/05/06
 
 # for the sequence version
@@ -133,6 +133,6 @@ export ASSEMBLY_CACHELOAD_CONFIG
 #
 ###########################################################################
 #  The name of the load for the subject of an email notification
-MAIL_LOADNAME="NCBI Assembly Load"
+MAIL_LOADNAME="VEGA Assembly Load"
 
 export MAIL_LOADNAME
