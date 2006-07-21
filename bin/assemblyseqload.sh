@@ -243,22 +243,22 @@ fi
 echo "coordload completed successfully" >> ${LOG_PROC}
 
 #
-# run the assemblycacheload 
+# run the accession association load
 #
-#echo "Running the assembly cache load" | tee -a ${LOG_DIAG} ${LOG_PROC}
-#echo "\n`date`" >> ${LOG_PROC}
+echo "Running the accession association load" | tee -a ${LOG_DIAG} ${LOG_PROC}
+echo "\n`date`" >> ${LOG_PROC}
 
-#${ASSEMBLY_CACHELOAD} ${ASSEMBLY_CACHELOAD_CONFIG}
+${ACC_LOAD} ${MGD_DBSERVER} ${MGD_DBNAME} ${MGD_DBUSER} ${MGD_DBPASSWORDFILE} ${CREATEDBY} ${OBJECTYPE} ${ACCJNUM} ${ASSOCFILE} ${ASSOCFILE}.log >>& ${LOG_PROC}
 
-#STAT=$?
-#if [ ${STAT} -ne 0 ]
-#then
-#    echo "assemblycacheload processing failed.  \
-#        Return status: ${STAT}" >> ${LOG_PROC}
-#    shutDown
-#    exit 1
-#fi
-#echo "assemblycacheload completed successfully" | tee -a  ${LOG_DIAG} ${LOG_PROC} 
+STAT=$?
+if [ ${STAT} -ne 0 ]
+then
+    echo "genaccload processing failed.  \
+        Return status: ${STAT}" >> ${LOG_PROC}
+    shutDown
+    exit 1
+fi
+echo "accession association completed successfully" | tee -a  ${LOG_DIAG} ${LOG_PROC} 
 
 #
 # run postload cleanup and email logs
@@ -267,27 +267,3 @@ shutDown
 
 exit 0
 
-$Log
-
-###########################################################################
-#
-# Warranty Disclaimer and Copyright Notice
-#
-#  THE JACKSON LABORATORY MAKES NO REPRESENTATION ABOUT THE SUITABILITY OR
-#  ACCURACY OF THIS SOFTWARE OR DATA FOR ANY PURPOSE, AND MAKES NO WARRANTIES,
-#  EITHER EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR A
-#  PARTICULAR PURPOSE OR THAT THE USE OF THIS SOFTWARE OR DATA WILL NOT
-#  INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER RIGHTS.
-#  THE SOFTWARE AND DATA ARE PROVIDED "AS IS".
-#
-#  This software and data are provided to enhance knowledge and encourage
-#  progress in the scientific community and are to be used only for research
-#  and educational purposes.  Any reproduction or use for commercial purpose
-#  is prohibited without the prior express written permission of The Jackson
-#  Laboratory.
-#
-#Copyright \251 1996, 1999, 2002, 2003 by The Jackson Laboratory
-#
-# All Rights Reserved
-#
-###########################################################################

@@ -169,13 +169,11 @@ export COORD_DLA_LOADER COORD_TYPE COORD_UNITS COORD_REPEAT_FILE COORD_REPEATS_O
 #
 ###########################################################################
 
-# assemblycacheload
-ASSEMBLY_CACHELOAD=${USRLOCALMGI}/dbutils/assemblycacheload/processfile.csh
-#ASSEMBLY_CACHELOAD=${USRLOCALMGI}/assemblycacheload/processfile.csh
+# accession association load script
+ACC_LOAD=${USRLOCALMGI}/dataload/genaccload/accLoad.sh
 
 # seqcacheload directory
 SEQ_CACHELOAD_DIR=${USRLOCALMGI}/dbutils/seqcacheload
-#SEQ_CACHELOAD_DIR=${USRLOCALMGI}/seqcacheload
 
 # seq/marker cache script
 SEQ_MARKER_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqmarker.csh
