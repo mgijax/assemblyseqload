@@ -6,6 +6,7 @@
 #  Purpose:  This script controls the execution of the assembly loads
 #
   Usage="assemblyseqload.sh config_file"
+#
 #     e.g. ncbi_seqload.config or ensembl_seqload.config
 #
 #  Env Vars:
@@ -17,6 +18,7 @@
 #      - Common configuration file (/usr/local/mgi/etc/common.config.sh)
 #      - Configuration file (assemblyseqload.config)
 #      - assembly input file 
+#      - gene model/marker association file (optional)
 #
 #  Outputs:
 #
@@ -128,8 +130,7 @@ if [ "${INFILE_NAME}" = "" ]
 then
      # set STAT for endJobStream.py called from postload in shutDown
     STAT=1
-    echo "INFILE_NAME not defined. Return status: ${STAT}" | \
-        tee -a ${LOG_DIAG}
+    echo "INFILE_NAME not defined. Return status: ${STAT}" | tee -a ${LOG_DIAG}
     shutDown
     exit 1
 fi
@@ -142,24 +143,6 @@ then
     shutDown
     exit 1
 fi
-
-#
-#  Function that performs cleanup tasks for the job stream prior to
-#  termination.
-#
-shutDown ()
-{
-    #
-    # report location of logs
-    #
-    echo "\nSee logs at ${LOGDIR}\n" >> ${LOG_PROC}
-
-    #
-    # call DLA library function
-    #
-    postload
-
-}
 
 ##################################################################
 ##################################################################
@@ -191,8 +174,7 @@ echo "Running assemblyseqload" | tee -a ${LOG_DIAG} ${LOG_PROC}
 # log time and input files to process
 echo "\n`date`" >> ${LOG_PROC}
 
-echo "Processing input file ${INFILE_NAME}" | \
-    tee -a ${LOG_DIAG} ${LOG_PROC}
+echo "Processing input file ${INFILE_NAME}" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 # run the load
 
@@ -203,8 +185,7 @@ ${JAVA} ${JAVARUNTIMEOPTS} -classpath ${CLASSPATH} \
 STAT=$?
 if [ ${STAT} -ne 0 ]
 then
-    echo "assemblyseqload processing failed.  \
-        Return status: ${STAT}" >> ${LOG_PROC}
+    echo "assemblyseqload processing failed. Return status: ${STAT}" >> ${LOG_PROC}
     shutDown
     exit 1
 fi
@@ -219,8 +200,7 @@ echo "Running coordload" | tee -a ${LOG_DIAG} ${LOG_PROC}
 # log time and input files to process
 echo "\n`date`" >> ${LOG_PROC}
 
-echo "Processing input file ${INFILE_NAME}" | \
-    tee -a ${LOG_DIAG} ${LOG_PROC}
+echo "Processing input file ${INFILE_NAME}" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 # Here we override the Configured value of DLA_LOADER
 # and set it to the Configured coordload class
@@ -232,8 +212,7 @@ ${JAVA} ${JAVARUNTIMEOPTS} -classpath ${CLASSPATH} \
 STAT=$?
 if [ ${STAT} -ne 0 ]
 then
-    echo "coordload processing failed.  \
-        Return status: ${STAT}" >> ${LOG_PROC}
+    echo "coordload processing failed. Return status: ${STAT}" >> ${LOG_PROC}
     shutDown
     exit 1
 fi
@@ -248,7 +227,7 @@ then
     echo "Running the genaccload" | tee -a ${LOG_DIAG} ${LOG_PROC}
     echo "\n`date`" >> ${LOG_PROC}
 
-    ${ACC_LOAD} ${MGD_DBSERVER} ${MGD_DBNAME} ${MGD_DBUSER} ${MGD_DBPASSWORDFILE} ${CREATEDBY} ${OBJECTYPE} ${ACCJNUM} ${ASSOCFILE} ${ASSOCFILE}.log >>& ${LOG_PROC}
+    ${ACC_LOAD} ${MGD_DBSERVER} ${MGD_DBNAME} ${MGD_DBUSER} ${MGD_DBPASSWORDFILE} ${JOBSTREAM} ${OBJECTYPE} ${ACCJNUM} ${ASSOCFILE} ${ASSOCFILE}.log >>& ${LOG_PROC}
 
     STAT=$?
     if [ ${STAT} -ne 0 ]
