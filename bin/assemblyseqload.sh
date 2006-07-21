@@ -1,8 +1,5 @@
 #!/bin/sh
 #
-#  $Header
-#  $Name
-#
 #  assemblyseqload.sh
 ###########################################################################
 #
@@ -243,22 +240,25 @@ fi
 echo "coordload completed successfully" >> ${LOG_PROC}
 
 #
-# run the accession association load
+# run the genaccload
 #
-echo "Running the accession association load" | tee -a ${LOG_DIAG} ${LOG_PROC}
-echo "\n`date`" >> ${LOG_PROC}
 
-${ACC_LOAD} ${MGD_DBSERVER} ${MGD_DBNAME} ${MGD_DBUSER} ${MGD_DBPASSWORDFILE} ${CREATEDBY} ${OBJECTYPE} ${ACCJNUM} ${ASSOCFILE} ${ASSOCFILE}.log >>& ${LOG_PROC}
-
-STAT=$?
-if [ ${STAT} -ne 0 ]
+if [ ${ASSOC_JNUMBER} != "0" ]
 then
-    echo "genaccload processing failed.  \
-        Return status: ${STAT}" >> ${LOG_PROC}
-    shutDown
-    exit 1
+    echo "Running the genaccload" | tee -a ${LOG_DIAG} ${LOG_PROC}
+    echo "\n`date`" >> ${LOG_PROC}
+
+    ${ACC_LOAD} ${MGD_DBSERVER} ${MGD_DBNAME} ${MGD_DBUSER} ${MGD_DBPASSWORDFILE} ${CREATEDBY} ${OBJECTYPE} ${ACCJNUM} ${ASSOCFILE} ${ASSOCFILE}.log >>& ${LOG_PROC}
+
+    STAT=$?
+    if [ ${STAT} -ne 0 ]
+    then
+        echo "genaccload processing failed.  Return status: ${STAT}" >> ${LOG_PROC}
+        shutDown
+        exit 1
+    fi
+    echo "genaccload completed successfully" | tee -a  ${LOG_DIAG} ${LOG_PROC} 
 fi
-echo "accession association completed successfully" | tee -a  ${LOG_DIAG} ${LOG_PROC} 
 
 #
 # run postload cleanup and email logs
