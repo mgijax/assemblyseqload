@@ -23,7 +23,10 @@ FILEDIR=/data/loads/assembly/ensemblseqload
 #  Complete path name of the ensembl input file
 INFILE_NAME=${INPUTDIR}/ensemblgenemodels.txt
 
-export INPUTDIR FILEDIR INFILE_NAME 
+# Complete path name of the ensembl/marker association file
+ASSOCFILE=/mgi/all/wts_projects/7600/7655/DataLoad/AssociationLoad/MGI_ENSEMBL_association_load
+
+export INPUTDIR FILEDIR INFILE_NAME ASSOCFILE
 
 ###########################################################################
 #

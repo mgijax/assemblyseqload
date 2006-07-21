@@ -22,8 +22,10 @@ FILEDIR=/data/loads/assembly/vegaseqload
 #  Complete path name of the vega input file
 INFILE_NAME=${INPUTDIR}/vegagenemodels.txt
 
+# Complete path name of the vega/marker association file
+ASSOCFILE=/mgi/all/wts_projects/7600/7655/DataLoad/AssociationLoad/MGI_VEGA_association_load
 
-export INPUTDIR FILEDIR INFILE_NAME
+export INPUTDIR FILEDIR INFILE_NAME ASSOCFILE
 
 ###########################################################################
 #
@@ -81,7 +83,7 @@ export SEQ_INTERPRETER
 
 ############################################################################
 #
-# ensembl coordload settings
+# vega coordload settings
 #
 ###########################################################################
 
