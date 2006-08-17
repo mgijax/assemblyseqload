@@ -1,9 +1,7 @@
 To Install assemblyseqload:
 
-     1) cp assembly_common.config.defaults assembly_common.config, edit as necessary
-     2) for each *assemblyseqload.config.defaults
-	cp *assemblyseqload.config.defaults *seqload.config and edit as necessary
-     3) for each *assemblyseqload.config
+     1) cp assembly_common.config.default assembly_common.config, edit as necessary
+     2) for each *assemblyseqload.config
          DLAInstall <full_path>/common.config.sh *assemblyseqload.config assembly_common.config
 
 A typical Install is done from assemblyseqload root directory 
