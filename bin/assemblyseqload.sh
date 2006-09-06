@@ -1,14 +1,12 @@
 #!/bin/sh
 #
-#  $Header
-#  $Name
-#
 #  assemblyseqload.sh
 ###########################################################################
 #
 #  Purpose:  This script controls the execution of the assembly loads
 #
   Usage="assemblyseqload.sh config_file"
+#
 #     e.g. ncbi_seqload.config or ensembl_seqload.config
 #
 #  Env Vars:
@@ -20,6 +18,7 @@
 #      - Common configuration file (/usr/local/mgi/etc/common.config.sh)
 #      - Configuration file (assemblyseqload.config)
 #      - assembly input file 
+#      - gene model/marker association file (optional)
 #
 #  Outputs:
 #
@@ -131,8 +130,7 @@ if [ "${INFILE_NAME}" = "" ]
 then
      # set STAT for endJobStream.py called from postload in shutDown
     STAT=1
-    echo "INFILE_NAME not defined. Return status: ${STAT}" | \
-        tee -a ${LOG_DIAG}
+    echo "INFILE_NAME not defined. Return status: ${STAT}" | tee -a ${LOG_DIAG}
     shutDown
     exit 1
 fi
@@ -145,24 +143,6 @@ then
     shutDown
     exit 1
 fi
-
-#
-#  Function that performs cleanup tasks for the job stream prior to
-#  termination.
-#
-shutDown ()
-{
-    #
-    # report location of logs
-    #
-    echo "\nSee logs at ${LOGDIR}\n" >> ${LOG_PROC}
-
-    #
-    # call DLA library function
-    #
-    postload
-
-}
 
 ##################################################################
 ##################################################################
@@ -194,8 +174,7 @@ echo "Running assemblyseqload" | tee -a ${LOG_DIAG} ${LOG_PROC}
 # log time and input files to process
 echo "\n`date`" >> ${LOG_PROC}
 
-echo "Processing input file ${INFILE_NAME}" | \
-    tee -a ${LOG_DIAG} ${LOG_PROC}
+echo "Processing input file ${INFILE_NAME}" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 # run the load
 
@@ -206,8 +185,7 @@ ${JAVA} ${JAVARUNTIMEOPTS} -classpath ${CLASSPATH} \
 STAT=$?
 if [ ${STAT} -ne 0 ]
 then
-    echo "assemblyseqload processing failed.  \
-        Return status: ${STAT}" >> ${LOG_PROC}
+    echo "assemblyseqload processing failed. Return status: ${STAT}" >> ${LOG_PROC}
     shutDown
     exit 1
 fi
@@ -222,8 +200,7 @@ echo "Running coordload" | tee -a ${LOG_DIAG} ${LOG_PROC}
 # log time and input files to process
 echo "\n`date`" >> ${LOG_PROC}
 
-echo "Processing input file ${INFILE_NAME}" | \
-    tee -a ${LOG_DIAG} ${LOG_PROC}
+echo "Processing input file ${INFILE_NAME}" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 # Here we override the Configured value of DLA_LOADER
 # and set it to the Configured coordload class
@@ -235,30 +212,32 @@ ${JAVA} ${JAVARUNTIMEOPTS} -classpath ${CLASSPATH} \
 STAT=$?
 if [ ${STAT} -ne 0 ]
 then
-    echo "coordload processing failed.  \
-        Return status: ${STAT}" >> ${LOG_PROC}
+    echo "coordload processing failed. Return status: ${STAT}" >> ${LOG_PROC}
     shutDown
     exit 1
 fi
 echo "coordload completed successfully" >> ${LOG_PROC}
 
 #
-# run the assemblycacheload 
+# run the genaccload
 #
-echo "Running the assembly cache load" | tee -a ${LOG_DIAG} ${LOG_PROC}
-echo "\n`date`" >> ${LOG_PROC}
 
-${ASSEMBLY_CACHELOAD} ${ASSEMBLY_CACHELOAD_CONFIG}
-
-STAT=$?
-if [ ${STAT} -ne 0 ]
+if [ ${ASSOC_JNUMBER} != "0" ]
 then
-    echo "assemblycacheload processing failed.  \
-        Return status: ${STAT}" >> ${LOG_PROC}
-    shutDown
-    exit 1
+    echo "Running the genaccload" | tee -a ${LOG_DIAG} ${LOG_PROC}
+    echo "\n`date`" >> ${LOG_PROC}
+
+    ${ACC_LOAD} ${MGD_DBSERVER} ${MGD_DBNAME} ${MGD_DBUSER} ${MGD_DBPASSWORDFILE} ${JOBSTREAM} ${ASSOC_OBJECTTYPE} ${ASSOC_JNUMBER} ${ASSOCFILE} ${ASSOCFILE}.log >> ${LOG_PROC}
+
+    STAT=$?
+    if [ ${STAT} -ne 0 ]
+    then
+        echo "genaccload processing failed.  Return status: ${STAT}" >> ${LOG_PROC}
+        shutDown
+        exit 1
+    fi
+    echo "genaccload completed successfully" | tee -a  ${LOG_DIAG} ${LOG_PROC} 
 fi
-echo "assemblycacheload completed successfully" | tee -a  ${LOG_DIAG} ${LOG_PROC} 
 
 #
 # run postload cleanup and email logs
@@ -267,27 +246,3 @@ shutDown
 
 exit 0
 
-$Log
-
-###########################################################################
-#
-# Warranty Disclaimer and Copyright Notice
-#
-#  THE JACKSON LABORATORY MAKES NO REPRESENTATION ABOUT THE SUITABILITY OR
-#  ACCURACY OF THIS SOFTWARE OR DATA FOR ANY PURPOSE, AND MAKES NO WARRANTIES,
-#  EITHER EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR A
-#  PARTICULAR PURPOSE OR THAT THE USE OF THIS SOFTWARE OR DATA WILL NOT
-#  INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER RIGHTS.
-#  THE SOFTWARE AND DATA ARE PROVIDED "AS IS".
-#
-#  This software and data are provided to enhance knowledge and encourage
-#  progress in the scientific community and are to be used only for research
-#  and educational purposes.  Any reproduction or use for commercial purpose
-#  is prohibited without the prior express written permission of The Jackson
-#  Laboratory.
-#
-#Copyright \251 1996, 1999, 2002, 2003 by The Jackson Laboratory
-#
-# All Rights Reserved
-#
-###########################################################################
