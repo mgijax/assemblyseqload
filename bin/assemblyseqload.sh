@@ -7,7 +7,7 @@
 #
   Usage="assemblyseqload.sh config_file"
 #
-#     e.g. ncbi_seqload.config or ensembl_seqload.config
+#     e.g. "assemblyseqload.sh ncbi_seqload.config" 
 #
 #  Env Vars:
 #
@@ -15,8 +15,10 @@
 #
 #  Inputs:
 #
-#      - Common configuration file (/usr/local/mgi/etc/common.config.sh)
-#      - Configuration file (assemblyseqload.config)
+#      - Common configuration file -
+#		/usr/local/mgi/live/mgiconfig/master.config.sh
+#      - Common Assembly configuration file - assemblyseqload.config
+#      - Specific Assembly configuration file - e.g. ncbi_seqload.config
 #      - assembly input file 
 #      - gene model/marker association file (optional)
 #
@@ -66,39 +68,36 @@ fi
 #
 #  Establish the configuration file names.
 #
-CONFIG_COMMON=`pwd`/common.config.sh
-CONFIG_LOAD_COMMON=`pwd`/assembly_common.config
 CONFIG_LOAD=`pwd`/$1
+CONFIG_LOAD_COMMON=`pwd`/assembly_common.config
 
 echo ${CONFIG_LOAD}
 
 #
 #  Make sure the configuration files are readable.
 #
-if [ ! -r ${CONFIG_LOAD_COMMON} ]
-then
-    echo "Cannot read configuration file: ${CONFIG_LOAD_COMMON}"
-    exit 1
-fi
-
-if [ ! -r ${CONFIG_COMMON} ]
-then
-    echo "Cannot read configuration file: ${CONFIG_COMMON}"
-    exit 1
-fi
-
 if [ ! -r ${CONFIG_LOAD} ]
 then
     echo "Cannot read configuration file: ${CONFIG_LOAD}"
     exit 1
 fi
 
+if [ ! -r ${CONFIG_LOAD_COMMON} ]
+then
+    echo "Cannot read configuration file: ${CONFIG_LOAD_COMMON}"
+    exit 1
+fi
+
 #
-# source config files
+# source config files - order is important
 #
-. $CONFIG_COMMON
 . $CONFIG_LOAD
 . ${CONFIG_LOAD_COMMON}
+
+#
+#  Establish master configuration file name, we pass this to java
+#
+CONFIG_MASTER=${MGICONFIG}/master.config.sh
 
 # reality check for important configuration vars
 echo "javaruntime:${JAVARUNTIMEOPTS}"
@@ -130,7 +129,7 @@ if [ "${INFILE_NAME}" = "" ]
 then
      # set STAT for endJobStream.py called from postload in shutDown
     STAT=1
-    echo "INFILE_NAME not defined. Return status: ${STAT}" | tee -a ${LOG_DIAG}
+    echo "INFILE_NAME not defined. Return status: ${STAT}" | tee -a ${LOG_DIAG} ${LOG_PROC}
     shutDown
     exit 1
 fi
@@ -139,7 +138,7 @@ if [ ! -r ${INFILE_NAME} ]
 then
     # set STAT for endJobStream.py called from postload in shutDown
     STAT=1
-    echo "Cannot read from input file: ${INFILE_NAME}" | tee -a ${LOG}
+    echo "Cannot read from input file: ${INFILE_NAME}" | tee -a ${LOG_DIAG} ${LOG_PROC}
     shutDown
     exit 1
 fi
@@ -172,24 +171,24 @@ echo "Running assemblyseqload" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 
 # log time and input files to process
-echo "\n`date`" >> ${LOG_PROC}
+echo "\n`date`" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 echo "Processing input file ${INFILE_NAME}" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 # run the load
 
 ${JAVA} ${JAVARUNTIMEOPTS} -classpath ${CLASSPATH} \
--DCONFIG=${CONFIG_COMMON},${CONFIG_LOAD},${CONFIG_LOAD_COMMON} \
+-DCONFIG=${CONFIG_MASTER},${CONFIG_LOAD},${CONFIG_LOAD_COMMON} \
 -DJOBKEY=${JOBKEY} ${DLA_START}
 
 STAT=$?
 if [ ${STAT} -ne 0 ]
 then
-    echo "assemblyseqload processing failed. Return status: ${STAT}" >> ${LOG_PROC}
+    echo "assemblyseqload processing failed. Return status: ${STAT}"  | tee -a ${LOG_DIAG} ${LOG_PROC}
     shutDown
     exit 1
 fi
-echo "assemblyseqload completed successfully" >> ${LOG_PROC}
+echo "assemblyseqload completed successfully"  | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 #
 # Run the assembly coordinate load
@@ -198,25 +197,25 @@ echo "assemblyseqload completed successfully" >> ${LOG_PROC}
 echo "Running coordload" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 # log time and input files to process
-echo "\n`date`" >> ${LOG_PROC}
+echo "\n`date`" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 echo "Processing input file ${INFILE_NAME}" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 # Here we override the Configured value of DLA_LOADER
 # and set it to the Configured coordload class
 ${JAVA} ${JAVARUNTIMEOPTS} -classpath ${CLASSPATH} \
--DCONFIG=${CONFIG_COMMON},${CONFIG_LOAD},${CONFIG_LOAD_COMMON} \
+-DCONFIG=${CONFIG_MASTER},${CONFIG_LOAD},${CONFIG_LOAD_COMMON} \
 -DDLA_LOADER=${COORD_DLA_LOADER} \
 -DJOBKEY=${JOBKEY} ${DLA_START}
 
 STAT=$?
 if [ ${STAT} -ne 0 ]
 then
-    echo "coordload processing failed. Return status: ${STAT}" >> ${LOG_PROC}
+    echo "coordload processing failed. Return status: ${STAT}" | tee -a ${LOG_DIAG} ${LOG_PROC}
     shutDown
     exit 1
 fi
-echo "coordload completed successfully" >> ${LOG_PROC}
+echo "coordload completed successfully" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 #
 # run the genaccload
@@ -225,14 +224,14 @@ echo "coordload completed successfully" >> ${LOG_PROC}
 if [ ${ASSOC_JNUMBER} != "0" ]
 then
     echo "Running the genaccload" | tee -a ${LOG_DIAG} ${LOG_PROC}
-    echo "\n`date`" >> ${LOG_PROC}
+    echo "\n`date`" | tee -a ${LOG_PROC}
 
-    ${ACC_LOAD} ${MGD_DBSERVER} ${MGD_DBNAME} ${MGD_DBUSER} ${MGD_DBPASSWORDFILE} ${JOBSTREAM} ${ASSOC_OBJECTTYPE} ${ASSOC_JNUMBER} ${ASSOCFILE} ${ASSOCFILE}.log >> ${LOG_PROC}
+    ${ACC_LOAD} ${MGD_DBSERVER} ${MGD_DBNAME} ${MGD_DBUSER} ${MGD_DBPASSWORDFILE} ${JOBSTREAM} ${ASSOC_OBJECTTYPE} ${ASSOC_JNUMBER} ${ASSOCFILE} ${ASSOCFILE}.log | tee -a ${LOG_DIAG} ${LOG_PROC}
 
     STAT=$?
     if [ ${STAT} -ne 0 ]
     then
-        echo "genaccload processing failed.  Return status: ${STAT}" >> ${LOG_PROC}
+        echo "genaccload processing failed.  Return status: ${STAT}" | tee -a ${LOG_DIAG} ${LOG_PROC}
         shutDown
         exit 1
     fi
