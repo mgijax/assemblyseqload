@@ -1,12 +1,10 @@
 #format: sh
 #
-#  Configuration common to NCBI and ENSEMBL assembly seqload
+#  Configuration common to all assembly seqloads
 #
 #  This file sets up environment variables that are common to all
 #  Assembly Sequence Loads
 #
-#  IMPORTANT: This file is dependent on FILEDIR set in both 
-#             ncbi_assemblyseqload.config and ensembl_assemblyseqload.config
 ###########################################################################
 
 #
@@ -19,19 +17,9 @@ then
     export MGICONFIG
 fi
 
-. ${MGICONFIG}/master.config.sh
-
-
-###########################################################################
-#
-#  GENERAL SETTINGS
-#
-###########################################################################
-
-#  Installation directory 
-INSTALLDIR=${DATALOAD}/assemblyseqload
-
-export INSTALLDIR
+# establish name of master config and source it
+CONFIG_MASTER=${MGICONFIG}/master.config.sh
+. ${CONFIG_MASTER}
 
 ###########################################################################
 #
@@ -57,21 +45,9 @@ export JAVARUNTIMEOPTS JAVA_LIB CLASSPATH
 ###########################################################################
 
 #
-# output file settings
-#
-
-# Full path the the logs, reports, and archive directories
-# FILEDIR defined in specific config file
-LOGDIR=${FILEDIR}/logs
-RPTDIR=${FILEDIR}/reports
-OUTPUTDIR=${FILEDIR}/output
-ARCHIVEDIR=${FILEDIR}/archive
-
-export LOGDIR RPTDIR OUTPUTDIR ARCHIVEDIR
-
-#
 # general settings
 #
+
 # Java applications
 DLA_LOADER=org.jax.mgi.shr.dla.loader.seq.AssemblySeqloader
 DLA_START=org.jax.mgi.shr.dla.loader.DLAStart
@@ -100,14 +76,6 @@ DLA_LOADER=org.jax.mgi.shr.dla.loader.seq.AssemblySeqloader
 DLA_START=org.jax.mgi.shr.dla.loader.DLAStart
 
 export DLA_LOADER DLA_START
-
-#  Complete path name of the log files
-LOG_PROC=${LOGDIR}/assemblyseqload.proc.log
-LOG_DIAG=${LOGDIR}/assemblyseqload.diag.log
-LOG_CUR=${LOGDIR}/assemblyseqload.cur.log
-LOG_VAL=${LOGDIR}/assemblyseqload.val.log
-
-export LOG_PROC LOG_DIAG LOG_CUR LOG_VAL 
 
 # incremental, incremental_initial, or delete_reload
 SEQ_LOAD_MODE=delete_reload
@@ -210,6 +178,11 @@ export RADAR_BCP_OK_TO_OVERWRITE
 #  MISCELLANEOUS SETTINGS
 #
 ###########################################################################
+
+# for DLAInstall
+INSTALLDIR=${DATALOAD}/assemblyseqload
+
+export INSTALLDIR
 
 #  Recipient list for mailing the log files (comma-separated)
 MAIL_LOG_CUR=""
