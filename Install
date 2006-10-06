@@ -1,11 +1,9 @@
-#!/bin/sh -x
+#!/bin/sh
 
 #
 # Installation script for assemblyseqload
 #
 # 1) cp ensembl_assemblyseqload.config.default ensembl_assemblyseqload.config
-# 2) cp ncbi_assemblyseqload.config.default ncbi_assemblyseqload.config
-# 3) cp assembly_common.config.default assembly_common.config
 # 2) Install 
 #
 
@@ -38,6 +36,11 @@ cd `dirname $0`
 ENSEMBL_CONFIG=ensembl_assemblyseqload.config
 NCBI_CONFIG=ncbi_assemblyseqload.config 
 VEGA_CONFIG=vega_assemblyseqload.config
+
+ENSEMBL_ASSOCCONFIG=ensembl_assocload.config
+NCBI_ASSOCCONFIG=ncbi_assocload.config
+VEGA_ASSOCCONFIG=vega_assocload.config
+
 COMMON_CONFIG=assembly_common.config
 
 # Make sure ensembl config file exists and source it
@@ -119,3 +122,70 @@ fi
 # run DLAInstall for vega seqload
 #
 ${DLAINSTALL} ${DEV}
+
+#
+# now do ensembl assocload
+#
+
+# Make sure vega config file exists and source it
+if [ -r ${ENSEMBL_ASSOCCONFIG} ]
+then
+    echo "Source ${ENSEMBL_ASSOCCONFIG}"
+    . ${ENSEMBL_ASSOCCONFIG}
+else
+    echo "Cannot source configuration file: ${ENSEMBL_ASSOCCONFIG}"
+    installFailed
+fi
+
+# source common config again
+. ${COMMON_CONFIG}
+
+#
+# run DLAInstall for ensembl assocload
+#
+${DLAINSTALL} ${DEV}
+
+#
+# now do ncbi assocload
+#
+
+# Make sure vega config file exists and source it
+if [ -r ${NCBI_ASSOCCONFIG} ]
+then
+    echo "Source ${NCBI_ASSOCCONFIG}"
+    . ${NCBI_ASSOCCONFIG}
+else
+    echo "Cannot source configuration file: ${NCBI_ASSOCCONFIG}"
+    installFailed
+fi
+
+# source common config again
+. ${COMMON_CONFIG}
+
+#
+# run DLAInstall for ensembl assocload
+#
+${DLAINSTALL} ${DEV}
+
+#
+# now do vega assocload
+#
+
+# Make sure vega config file exists and source it
+if [ -r ${VEGA_ASSOCCONFIG} ]
+then
+    echo "Source ${VEGA_ASSOCCONFIG}"
+    . ${VEGA_ASSOCCONFIG}
+else
+    echo "Cannot source configuration file: ${VEGA_ASSOCCONFIG}"
+    installFailed
+fi
+
+# source common config again
+. ${COMMON_CONFIG}
+
+#
+# run DLAInstall for ensembl assocload
+#
+${DLAINSTALL} ${DEV}
+
