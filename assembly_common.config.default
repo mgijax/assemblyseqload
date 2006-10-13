@@ -19,6 +19,9 @@ fi
 
 # establish name of master config and source it
 CONFIG_MASTER=${MGICONFIG}/master.config.sh
+
+export CONFIG_MASTER
+
 . ${CONFIG_MASTER}
 
 ###########################################################################
@@ -126,20 +129,14 @@ export COORD_DLA_LOADER COORD_TYPE COORD_UNITS COORD_REPEAT_FILE COORD_REPEATS_O
 #
 ###########################################################################
 
-# accession association load script
-ACC_LOAD=${DATALOAD}/genaccload/accLoad.sh
-
-# seqcacheload directory
-SEQ_CACHELOAD_DIR=${DATALOAD}/seqcacheload
-
 # seq/marker cache script
-SEQ_MARKER_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqmarker.csh
+SEQ_MARKER_CACHELOAD=${SEQCACHELOAD}/seqmarker.csh
 
 # seq/coordinate cache script
-SEQ_COORD_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqcoord.csh
+SEQ_COORD_CACHELOAD=${SEQCACHELOAD}/seqcoord.csh
 
 # seq description cache script
-SEQ_MARKER_DESCRIPT_CACHELOAD=${SEQ_CACHELOAD_DIR}/seqdescription.csh
+SEQ_MARKER_DESCRIPT_CACHELOAD=${SEQCACHELOAD}/seqdescription.csh
 
 ###########################################################################
 #
@@ -180,7 +177,7 @@ export RADAR_BCP_OK_TO_OVERWRITE
 ###########################################################################
 
 # for DLAInstall
-INSTALLDIR=${DATALOAD}/assemblyseqload
+INSTALLDIR=${ASSEMBLYSEQLOAD}
 
 export INSTALLDIR
 
