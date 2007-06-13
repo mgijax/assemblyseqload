@@ -207,15 +207,61 @@ ${JAVA} ${JAVARUNTIMEOPTS} -classpath ${CLASSPATH} \
 STAT=$?
 checkStatus ${STAT} "${COORDLOAD}"
 
-# run sequence/marker assocload
+if [ ${OK_LOAD_SEQ_CACHE_TABLES} = 'true' ]
+then
+    echo "loading SEQ_Coord_Cache table" | tee -a ${LOG_DIAG} ${LOG_PROC}
+    ${SEQCACHELOAD}/seqcoord.csh | tee -a ${LOG_DIAG}
+    STAT=$?
+    checkStatus ${STAT} "${SEQCACHELOAD}/seqcoord.csh"
+fi
+
+# run sequence/marker assocload and chromosome check
 if [ ${ASSOC_JNUMBER} != "0" ]
 then
     echo "Running the assocload" | tee -a ${LOG_DIAG} ${LOG_PROC}
     echo "\n`date`" >> ${LOG_PROC}
 
-        ${ASSOCLOADER_SH} ${CONFIG_LOAD} ${CONFIG_ASSOCLOAD}
+    ${ASSOCLOADER_SH} ${CONFIG_LOAD} ${CONFIG_ASSOCLOAD}
+    STAT=$?
+    checkStatus ${STAT} "${ASSOCLOADER_SH}"
+
+    echo "Running Chromosome Report" | tee -a ${LOG_DIAG} ${LOG_PROC}
+    echo "\n`date`" >> ${LOG_PROC}
+    ${ASSEMBLYSEQLOAD}/bin/chrcheck.sh ${CONFIG_LOAD_COMMON} ${CONFIG_LOAD} | tee -a ${LOG_DIAG}
+    STAT=$?
+    checkStatus ${STAT} "chrcheck.sh"
+
+
+    if [ ${OK_LOAD_MRK_CACHE_TABLES} = 'true' ]
+    then
+	echo "loading SEQ_Marker_Cache table" | tee -a ${LOG_DIAG} ${LOG_PROC}
+	${SEQCACHELOAD}/seqmarker.csh | tee -a ${LOG_DIAG}
+	STAT=$?
+	checkStatus ${STAT} "${SEQCACHELOAD}/seqmarker.csh"
+
+        echo "loading SEQ_Description_Cache table" | tee -a ${LOG_DIAG} ${LOG_PROC}
+        ${SEQCACHELOAD}/seqdescription.csh | tee -a ${LOG_DIAG}
         STAT=$?
-        checkStatus ${STAT} "${ASSOCLOADER_SH}"
+        checkStatus ${STAT} "${SEQCACHELOAD}/seqdescription.csh"
+
+	echo "loading MRK_Label cache table" | tee -a ${LOG_DIAG} ${LOG_PROC}
+        ${MRKCACHELOAD}/mrklabel.csh | tee -a ${LOG_DIAG}
+        STAT=$?
+        checkStatus ${STAT} "${MRKCACHELOAD}/mrklabel.csh"
+
+        echo "loading MRK_Location_Cache table" | tee -a ${LOG_DIAG} ${LOG_PROC}
+        ${MRKCACHELOAD}/mrklocation.csh | tee -a ${LOG_DIAG}
+        STAT=$?
+        checkStatus ${STAT} "${MRKCACHELOAD}/mrklocation.csh"
+
+        echo "loading MRK_Reference cache table" | tee -a ${LOG_DIAG} ${LOG_PROC}
+        ${MRKCACHELOAD}/mrkref.csh | tee -a ${LOG_DIAG}
+        STAT=$?
+        checkStatus ${STAT} "${MRKCACHELOAD}/mrkref.csh"
+
+    fi
+    
+
 fi
 
 #

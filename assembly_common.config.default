@@ -51,12 +51,6 @@ export JAVARUNTIMEOPTS JAVA_LIB CLASSPATH
 # general settings
 #
 
-# Java applications
-DLA_LOADER=org.jax.mgi.shr.dla.loader.seq.AssemblySeqloader
-DLA_START=org.jax.mgi.shr.dla.loader.DLAStart
-
-export DLA_LOADER DLA_START
-
 # SQL STREAM
 # this overrides the default BCP_Inline_Stream
 DLA_LOAD_STREAM=org.jax.mgi.shr.dbutils.dao.BCP_Stream

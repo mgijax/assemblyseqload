@@ -1,3 +1,10 @@
+TAG: assemblyseqload-3-5-3-3
+DATE: 06/13/2007
+STAFF: sc
+CHANGES: TR8356
+1) add configuration  to run cacheloads with default of false
+2) add gene model to gene chromosome consistency check script
+
 TAG: assemblyseqload-3-5-3-2
 DATE: 05/16/2007
 STAFF: sc
