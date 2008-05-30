@@ -1,3 +1,15 @@
+TAG: assemblyseqload-4-1-0-1
+DATE: 05/30/2008
+STAFF: dbm
+CHANGES:
+1) Merged tr8528 branch to the trunk
+
+TAG: assemblyseqload-tr8528-1
+DATE: 05/09/2008
+STAFF: dbm
+CHANGES:
+1) Config file changes for Build 37
+
 TAG: assemblyseqload-tr8528-BP
 DATE: 04/25/2008
 STAFF: dbm
