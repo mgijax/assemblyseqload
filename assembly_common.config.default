@@ -176,6 +176,6 @@ INSTALLDIR=${ASSEMBLYSEQLOAD}
 export INSTALLDIR
 
 #  Recipient list for mailing the log files (comma-separated)
-MAIL_LOG_CUR=""
+MAIL_LOG_CUR="mgiadmin"
 
 export MAIL_LOG_CUR
