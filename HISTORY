@@ -1,3 +1,9 @@
+TAG: assemblyseqload-4-4-1-2
+DATE: 07/14/2011
+STAFF: sc
+CHANGES: TR10717 - reload ncbi gene models
+1) ncbi_assemblyseqload.config - updated for release 37.2
+
 TAG: assemblyseqload-4-4-1-1
 DATE: 03/01/2011
 STAFF: dbm
