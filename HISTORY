@@ -3,6 +3,7 @@ DATE: 12/15/2011
 STAFF: sc
 CHANGES: TR10921 Ensembl 65
 1) ensembl_assemblyseqload.config - updated release date
+2) removed MAIL_LOG_CUR setting because there is no curation log to 
 
 TAG: assemblyseqload-4-4-1-3
 DATE: 09/06/2011
