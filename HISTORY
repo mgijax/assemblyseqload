@@ -1,3 +1,10 @@
+TAG: assemblyseqload-4-4-2-1
+DATE: 03/12/2012
+STAFF: sc
+CHANGES: TR11002/TR11003
+1) ensembl_assemblyseqload.config - updated release date for build 66
+2) vega_assemblyseqload.config - updated release date for build 46
+
 TAG: assemblyseqload-4-4-1-4
 DATE: 12/15/2011
 STAFF: sc
