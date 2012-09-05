@@ -1,8 +1,10 @@
+TAG: assemblyseqload-5-0-0-2
 TAG: assemblyseqload-5-0-0-1
 DATE: 08/31/2012
 STAFF: sc
 CHANGES: TR7106 (CFAM) TR10711 (Build 38)
 1) config changes for build 38
+2) SEQ_RELEASE_DATE needs to be in yyyy/mm/dd format
 
 TAG: assemblyseqload-4-4-2-1
 DATE: 03/12/2012
