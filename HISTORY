@@ -1,3 +1,9 @@
+TAG: assemblyseqload-5-0-0-3
+DATE: 09/17/2012
+STAFF: sc
+CHANGES: TR7106 (CFAM) TR10711 (Build 38)
+1) *assemblyseqload.config:COORD_COLLECTION_ABBREV changes for C4AM - set to display value instead of default which is same value as name
+
 TAG: assemblyseqload-5-0-0-2
 TAG: assemblyseqload-5-0-0-1
 DATE: 08/31/2012
