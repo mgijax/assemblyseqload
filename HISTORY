@@ -1,3 +1,10 @@
+TAG: assemblyseqload-5-0-0-4
+DATE: 10/11/2012
+STAFF: sc
+CHANGES: TR7106 (CFAM) TR10711 (Build 38)
+1) Update  *assemblyseqload.config:
+	SEQ_RELEASE_NO="GRCm38"
+	COORD_VERSION="GRCm38"
 TAG: assemblyseqload-5-0-0-3
 DATE: 09/17/2012
 STAFF: sc
