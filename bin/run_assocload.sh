@@ -87,7 +87,8 @@ fi
 if [ ${ASSOC_JNUMBER} != "0" ]
 then
     echo "Running the assocload" | tee -a ${LOG_DIAG} ${LOG_PROC}
-    echo "\n`date`" | tee -a ${LOG_PROC}
+    echo "" | tee -a ${LOG_PROC}
+    echo "`date`" | tee -a ${LOG_PROC}
 
 	${ASSOCLOADER_SH} ${CONFIG_LOAD} ${CONFIG_ASSOCLOAD}
 	STAT=$?

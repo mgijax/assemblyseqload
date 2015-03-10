@@ -173,7 +173,8 @@ echo "Running assemblyseqload" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 
 # log time and input files to process
-echo "\n`date`" >> ${LOG_DIAG} ${LOG_PROC}
+echo "" >> ${LOG_DIAG} ${LOG_PROC}
+echo "`date`" >> ${LOG_DIAG} ${LOG_PROC}
 
 echo "Processing input file ${INFILE_NAME}" >> ${LOG_DIAG} ${LOG_PROC}
 
@@ -193,7 +194,8 @@ checkStatus ${STAT} "${ASSEMBLYSEQLOAD}"
 echo "Running coordload" | tee -a ${LOG_DIAG} ${LOG_PROC}
 
 # log time and input files to process
-echo "\n`date`" >> ${LOG_DIAG} ${LOG_PROC}
+echo "" >> ${LOG_DIAG} ${LOG_PROC}
+echo "`date`" >> ${LOG_DIAG} ${LOG_PROC}
 
 echo "Processing input file ${INFILE_NAME}" >> ${LOG_DIAG} ${LOG_PROC}
 
@@ -219,14 +221,16 @@ fi
 if [ ${ASSOC_JNUMBER} != "0" ]
 then
     echo "Running the assocload" | tee -a ${LOG_DIAG} ${LOG_PROC}
-    echo "\n`date`" >> ${LOG_PROC}
+    echo "" >> ${LOG_PROC}
+    echo "`date`" >> ${LOG_PROC}
 
     ${ASSOCLOADER_SH} ${CONFIG_LOAD} ${CONFIG_ASSOCLOAD}
     STAT=$?
     checkStatus ${STAT} "${ASSOCLOADER_SH}"
 
     echo "Running Chromosome Report" | tee -a ${LOG_DIAG} ${LOG_PROC}
-    echo "\n`date`" >> ${LOG_PROC}
+    echo "" >> ${LOG_PROC}
+    echo "`date`" >> ${LOG_PROC}
     ${ASSEMBLYSEQLOAD}/bin/chrcheck.sh ${CONFIG_LOAD_COMMON} ${CONFIG_LOAD} | tee -a ${LOG_DIAG}
     STAT=$?
     checkStatus ${STAT} "chrcheck.sh"
