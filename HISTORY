@@ -1,3 +1,10 @@
+TAG: assemblyseqload-5-2-1-4
+DATE: 01/16/2015
+STAFF: sc
+CHANGES: TR11959 NCBI release 105
+- SEQ_RELEASE_DATE=2015/02/09
+- SEQ_RELEASE_NO="GRCm38.p3"
+
 TAG: assemblyseqload-5-2-1-3
 DATE: 01/16/2015
 STAFF: sc
