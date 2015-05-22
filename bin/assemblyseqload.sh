@@ -243,11 +243,6 @@ then
 	STAT=$?
 	checkStatus ${STAT} "${SEQCACHELOAD}/seqmarker.csh"
 
-        echo "loading SEQ_Description_Cache table" | tee -a ${LOG_DIAG} ${LOG_PROC}
-        ${SEQCACHELOAD}/seqdescription.csh | tee -a ${LOG_DIAG}
-        STAT=$?
-        checkStatus ${STAT} "${SEQCACHELOAD}/seqdescription.csh"
-
 	echo "loading MRK_Label cache table" | tee -a ${LOG_DIAG} ${LOG_PROC}
         ${MRKCACHELOAD}/mrklabel.csh | tee -a ${LOG_DIAG}
         STAT=$?
