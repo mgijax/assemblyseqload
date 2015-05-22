@@ -1,3 +1,15 @@
+TAG: assemblyseqload-5-2-2-1
+DATE: 05/22/2015
+STAFF: lec
+CHANGE: TR11750
+a) assemblyseqload.sh : seqcacheload/seqdescription.csh : obsolete
+
+TAG: assemblyseqload-5-1-9-?
+DATE: 10/16/2014
+STAFF: lec
+CHANGES: TR11683/NCBI 104
+a) ncbi_assemblyseqload.config : SEQ_RELEASE_DATA, SEQ_RELEASE_NO
+
 TAG: assemblyseqload-tr11750-BP
 DATE: 04/08/2015
 STAFF: kstone
@@ -29,6 +41,7 @@ STAFF: sc
 CHANGES: TR11794/ENSEMBL 76
 a) ensembl_assemblyseqload.config - updated SEQ_RELEASE_DATE
 
+>>>>>>> 1.60
 TAG: assemblyseqload-5-1-9-1
 DATE: 08/11/2014
 STAFF: lec
