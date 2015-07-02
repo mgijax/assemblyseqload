@@ -15,6 +15,11 @@ STAFF: lec
 CHANGES: TR11683/NCBI 104
 a) ncbi_assemblyseqload.config : SEQ_RELEASE_DATA, SEQ_RELEASE_NO
 
+TAG: assemblyseqload-tr11750-1
+DATE: 05/22/2015
+STAFF: lec
+a) assemblyseqload.sh : seqcacheload/seqdescription.csh : obsolete
+
 TAG: assemblyseqload-tr11750-BP
 DATE: 04/08/2015
 STAFF: kstone
