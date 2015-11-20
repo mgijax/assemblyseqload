@@ -61,11 +61,11 @@ rm -f ${LOG}
 #
 #  Verify the argument(s) to the shell script.
 #
-#if [ $# -ne 1 ]
-#then
-#    echo ${Usage} | tee -a ${LOG}
-#    exit 1
-#fi
+if [ $# -ne 1 ]
+then
+    echo ${Usage} | tee -a ${LOG}
+    exit 1
+fi
 
 #
 #  Establish the configuration file names.
@@ -231,7 +231,7 @@ then
     echo "Running Chromosome Report" | tee -a ${LOG_DIAG} ${LOG_PROC}
     echo "" >> ${LOG_PROC}
     echo "`date`" >> ${LOG_PROC}
-    ${ASSEMBLYSEQLOAD}/bin/chrcheck.sh ${CONFIG_LOAD} ${CONFIG_LOAD_COMMON} ${CONFIG_LOAD} | tee -a ${LOG_DIAG}
+    ${ASSEMBLYSEQLOAD}/bin/chrcheck.sh ${CONFIG_LOAD_COMMON} ${CONFIG_LOAD} | tee -a ${LOG_DIAG}
     STAT=$?
     checkStatus ${STAT} "chrcheck.sh"
 
