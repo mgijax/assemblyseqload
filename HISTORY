@@ -1,8 +1,10 @@
+TAG: assemblyseqload-6-0-4-3
 TAG: assemblyseqload-6-0-4-2
-DATE: 04/29/2016
+DATE: 04/29/2016, 07/23/2016
 STAFF: lec
-CHANGES: TR12354/12382/VEGA 65
+CHANGES: TR12354/12382/VEGA 65/Ensembl 85
 1) vega_assemblyseqload.config: SEQ_RELEASE_DATE
+2) ensembl_assemblyseqload.config : SEQ_RELEASE_DATE
 
 TAG: assemblyseqload-6-0-4-1
 DATE: 04/29/2016
