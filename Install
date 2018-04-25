@@ -36,10 +36,12 @@ cd `dirname $0`
 ENSEMBL_CONFIG=ensembl_assemblyseqload.config
 NCBI_CONFIG=ncbi_assemblyseqload.config 
 VEGA_CONFIG=vega_assemblyseqload.config
+MGP_CONFIG=mgp_assemblyseqload.config
 
 ENSEMBL_ASSOCCONFIG=ensembl_assocload.config
 NCBI_ASSOCCONFIG=ncbi_assocload.config
 VEGA_ASSOCCONFIG=vega_assocload.config
+MGP_ASSOCCONFIG=mgp_assocload.config
 
 COMMON_CONFIG=assembly_common.config
 
@@ -123,13 +125,35 @@ fi
 ${DLAINSTALL} ${DEV}
 
 #
+# now do mgp seqload
+#
+
+# source common config again
+. ${COMMON_CONFIG}
+
+# Make sure mgp config file exists and source it
+if [ -r ${MGP_CONFIG} ]
+then
+    echo "Source ${MGP_CONFIG}"
+    . ${MGP_CONFIG}
+else
+    echo "Cannot source configuration file: ${MGP_CONFIG}"
+    installFailed
+fi
+
+#
+# run DLAInstall for mgp seqload
+#
+${DLAINSTALL} ${DEV}
+
+#
 # now do ensembl assocload
 #
 
 # source common config again
 . ${COMMON_CONFIG}
 
-# Make sure vega config file exists and source it
+# Make sure ensembl config file exists and source it
 if [ -r ${ENSEMBL_ASSOCCONFIG} ]
 then
     echo "Source ${ENSEMBL_ASSOCCONFIG}"
@@ -151,7 +175,7 @@ ${DLAINSTALL} ${DEV}
 # source common config again
 . ${COMMON_CONFIG}
 
-# Make sure vega config file exists and source it
+# Make sure ncbi config file exists and source it
 if [ -r ${NCBI_ASSOCCONFIG} ]
 then
     echo "Source ${NCBI_ASSOCCONFIG}"
@@ -162,7 +186,7 @@ else
 fi
 
 #
-# run DLAInstall for ensembl assocload
+# run DLAInstall for ncbi assocload
 #
 ${DLAINSTALL} ${DEV}
 
@@ -184,7 +208,29 @@ else
 fi
 
 #
-# run DLAInstall for ensembl assocload
+# run DLAInstall for vega assocload
+#
+${DLAINSTALL} ${DEV}
+
+#
+# now do mgp assocload
+#
+
+# source common config again
+. ${COMMON_CONFIG}
+
+# Make sure mgp config file exists and source it
+if [ -r ${MGP_ASSOCCONFIG} ]
+then
+    echo "Source ${MGP_ASSOCCONFIG}"
+    . ${MGP_ASSOCCONFIG}
+else
+    echo "Cannot source configuration file: ${MGP_ASSOCCONFIG}"
+    installFailed
+fi
+
+#
+# run DLAInstall for mgp assocload
 #
 ${DLAINSTALL} ${DEV}
 
