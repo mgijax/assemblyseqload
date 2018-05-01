@@ -41,7 +41,6 @@ MGP_CONFIG=mgp_assemblyseqload.config
 ENSEMBL_ASSOCCONFIG=ensembl_assocload.config
 NCBI_ASSOCCONFIG=ncbi_assocload.config
 VEGA_ASSOCCONFIG=vega_assocload.config
-MGP_ASSOCCONFIG=mgp_assocload.config
 
 COMMON_CONFIG=assembly_common.config
 
@@ -218,16 +217,6 @@ ${DLAINSTALL} ${DEV}
 
 # source common config again
 . ${COMMON_CONFIG}
-
-# Make sure mgp config file exists and source it
-if [ -r ${MGP_ASSOCCONFIG} ]
-then
-    echo "Source ${MGP_ASSOCCONFIG}"
-    . ${MGP_ASSOCCONFIG}
-else
-    echo "Cannot source configuration file: ${MGP_ASSOCCONFIG}"
-    installFailed
-fi
 
 #
 # run DLAInstall for mgp assocload
