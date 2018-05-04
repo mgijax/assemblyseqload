@@ -35,12 +35,10 @@ cd `dirname $0`
 # establish the config file names
 ENSEMBL_CONFIG=ensembl_assemblyseqload.config
 NCBI_CONFIG=ncbi_assemblyseqload.config 
-VEGA_CONFIG=vega_assemblyseqload.config
 MGP_CONFIG=mgp_assemblyseqload.config
 
 ENSEMBL_ASSOCCONFIG=ensembl_assocload.config
 NCBI_ASSOCCONFIG=ncbi_assocload.config
-VEGA_ASSOCCONFIG=vega_assocload.config
 
 COMMON_CONFIG=assembly_common.config
 
@@ -63,6 +61,10 @@ then
     DEV="-d"
 fi
 
+#
+# Ensembl Sequence Load
+#
+
 # Make sure ensembl config file exists and source it
 if [ -r ${ENSEMBL_CONFIG} ]
 then
@@ -80,7 +82,7 @@ echo 'running DLAINSTALL'
 ${DLAINSTALL} ${DEV}
 
 #
-# now do ncbi seqload
+# NCBI Sequence Load
 # 
 
 # source common config again
@@ -102,29 +104,7 @@ fi
 ${DLAINSTALL} ${DEV}
 
 #
-# now do vega seqload
-# 
-
-# source common config again
-. ${COMMON_CONFIG}
-
-# Make sure vega config file exists and source it
-if [ -r ${VEGA_CONFIG} ]
-then
-    echo "Source ${VEGA_CONFIG}"
-    . ${VEGA_CONFIG}
-else
-    echo "Cannot source configuration file: ${VEGA_CONFIG}"
-    installFailed
-fi
-
-#
-# run DLAInstall for vega seqload
-#
-${DLAINSTALL} ${DEV}
-
-#
-# now do mgp seqload
+# MGP Sequence Load
 #
 
 # source common config again
@@ -146,7 +126,7 @@ fi
 ${DLAINSTALL} ${DEV}
 
 #
-# now do ensembl assocload
+# Ensembl Assocload
 #
 
 # source common config again
@@ -168,7 +148,7 @@ fi
 ${DLAINSTALL} ${DEV}
 
 #
-# now do ncbi assocload
+# NCBI Assocload
 #
 
 # source common config again
@@ -189,39 +169,7 @@ fi
 #
 ${DLAINSTALL} ${DEV}
 
-#
-# now do vega assocload
-#
-
-# source common config again
-. ${COMMON_CONFIG}
-
-# Make sure vega config file exists and source it
-if [ -r ${VEGA_ASSOCCONFIG} ]
-then
-    echo "Source ${VEGA_ASSOCCONFIG}"
-    . ${VEGA_ASSOCCONFIG}
-else
-    echo "Cannot source configuration file: ${VEGA_ASSOCCONFIG}"
-    installFailed
-fi
-
-#
-# run DLAInstall for vega assocload
-#
-${DLAINSTALL} ${DEV}
-
-#
-# now do mgp assocload
-#
-
-# source common config again
-. ${COMMON_CONFIG}
-
-#
-# run DLAInstall for mgp assocload
-#
-${DLAINSTALL} ${DEV}
+# There is no MGP assocload
 
 chgrp mgi *config
 
