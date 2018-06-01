@@ -36,6 +36,7 @@ cd `dirname $0`
 ENSEMBL_CONFIG=ensembl_assemblyseqload.config
 NCBI_CONFIG=ncbi_assemblyseqload.config 
 MGP_CONFIG=mgp_assemblyseqload.config
+MGI_CONFIG=b6_assemblyseqload.config
 
 ENSEMBL_ASSOCCONFIG=ensembl_assocload.config
 NCBI_ASSOCCONFIG=ncbi_assocload.config
@@ -117,6 +118,19 @@ then
     . ${MGP_CONFIG}
 else
     echo "Cannot source configuration file: ${MGP_CONFIG}"
+    installFailed
+fi
+
+# source common config again
+. ${COMMON_CONFIG}
+
+# Make sure MGI B6 config file exists and source it
+if [ -r ${MGI_CONFIG} ]
+then
+    echo "Source ${MGI_CONFIG}"
+    . ${MGI_CONFIG}
+else
+    echo "Cannot source configuration file: ${MGI_CONFIG}"
     installFailed
 fi
 

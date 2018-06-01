@@ -1,9 +1,9 @@
 #format: sh
 #
-#  mgp_assemblyseqload.config
+#  b6_assemblyseqload.config
 #
 #  This file sets up environment variables that are needed for the
-#  MGP Assembly Sequence and Coordinate Loads
+#  MGI B6 Assembly Sequence and Coordinate Loads
 #
 # The following config settings can change between loads:
 # 1) SEQ_RELEASE_DATE
@@ -24,12 +24,12 @@
 #
 ###########################################################################
 
-# Full path to dir containing MGP input files - note
+# Full path to dir containing MGI B6 input file - note
 # these are created by the strainmarkerload
 INPUTDIR=${DATALOADSOUTPUT}/mgi/strainmarkerload/output
 
 # Full path the the logs, reports, and archive directories
-FILEDIR=${DATALOADSOUTPUT}/assembly/mgpseqload
+FILEDIR=${DATALOADSOUTPUT}/assembly/b6seqload
 
 export INPUTDIR FILEDIR
 
@@ -49,11 +49,11 @@ LOG_VAL=${LOGDIR}/assemblyseqload.val.log
 
 export LOG_PROC LOG_DIAG LOG_CUR LOG_VAL
 
-#  Complete path name of the mgp input file
-INFILE_NAME=${INPUTDIR}/gm_mgpinputfile.txt
+#  Complete path name of the b6 input file
+INFILE_NAME=${INPUTDIR}/gm_b6inputfile.txt
 
 # Complete path to config file for assocload
-CONFIG_ASSOCLOAD=${ASSEMBLYSEQLOAD}/mgp_assocload.config
+CONFIG_ASSOCLOAD=${ASSEMBLYSEQLOAD}/b6_assocload.config
 
 export INFILE_NAME CONFIG_ASSOCLOAD
 
@@ -113,13 +113,13 @@ SEQ_RELEASE_DATE=2017/07/01
 SEQ_RELEASE_NO="MGP Release 91"
 
 # Load's MGI_User login value for DB tables CreatedBy and ModifiedBy column
-JOBSTREAM=mgp_assemblyseqload
+JOBSTREAM=b6_assemblyseqload
 
-# SEQ_Sequence Provider controlled vocab for MGP
-SEQ_PROVIDER="MGP Strain Gene Model"
+# SEQ_Sequence Provider controlled vocab for MGI B6 
+SEQ_PROVIDER="MGI B6 Strain Gene Model"
 
 # logical db name for this data provider
-SEQ_LOGICALDB="Mouse Genome Project"
+SEQ_LOGICALDB="MGI Strain Gene"
 
 export SEQ_RELEASE_DATE SEQ_RELEASE_NO JOBSTREAM SEQ_PROVIDER SEQ_LOGICALDB
 
@@ -154,14 +154,14 @@ COORD_LOGICALDB=${SEQ_LOGICALDB}
 COORD_ORGANISM=${SEQ_ORGANISM}
 
 # version of the coordinate load
-COORD_VERSION="MGP Release 91"
+COORD_VERSION="GRCm38"
 
 # coordinate map collection to which this load belongs
-COORD_COLLECTION_NAME="Mouse Genome Project"
+COORD_COLLECTION_NAME="MGI B6 Strain Gene Model"
 
 # abbreviation for the coordinate collection
 # if no value assigned will be same as COORD_COLLECTION
-COORD_COLLECTION_ABBREV="MGP"
+COORD_COLLECTION_ABBREV="MGI B6 Strain Gene Model"
 
 # MGI type name of the feature
 COORD_FEATURE_MGITYPE=Sequence
@@ -175,7 +175,7 @@ export COORD_COLLECTION_NAME COORD_COLLECTION_ABBREV COORD_FEATURE_MGITYPE
 #
 ###########################################################################
 #  The name of the load for the subject of an email notification
-MAIL_LOADNAME="MGP Assembly Load"
+MAIL_LOADNAME="MGI B6 Assembly Load"
 
 export MAIL_LOADNAME
 
