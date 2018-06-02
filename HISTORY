@@ -1,3 +1,9 @@
+TAG: assemblyseqload-tr12734-2
+DATE: 06/02/2018
+STAFF: sc
+CHANGES: TR12734/GF project
+1) fixed config bugs - B6 JNUM and SEQ_RELEASE_NO
+
 TAG: assemblyseqload-tr12734-1
 DATE: 06/01/2018
 STAFF: sc
