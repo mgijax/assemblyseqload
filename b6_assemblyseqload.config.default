@@ -53,7 +53,7 @@ export LOG_PROC LOG_DIAG LOG_CUR LOG_VAL
 INFILE_NAME=${INPUTDIR}/gm_b6inputfile.txt
 
 # Complete path to config file for assocload
-CONFIG_ASSOCLOAD=${ASSEMBLYSEQLOAD}/b6_assocload.config
+CONFIG_ASSOCLOAD=${ASSEMBLYSEQLOAD}/B6_assocload.config
 
 export INFILE_NAME CONFIG_ASSOCLOAD
 

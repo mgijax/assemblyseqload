@@ -1,3 +1,10 @@
+TAG: assemblyseqload-tr12734-3
+DATE: 06/07/2018
+STAFF: sc
+CHANGES: TR12734/GF project
+1) b6_assemblyseqload.config.default - fixed jobstream name b6 to B6
+   CONFIG_ASSOCLOAD=${ASSEMBLYSEQLOAD}/B6_assocload.config
+
 TAG: assemblyseqload-tr12734-2
 DATE: 06/02/2018
 STAFF: sc
