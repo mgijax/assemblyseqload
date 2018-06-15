@@ -52,11 +52,6 @@ export LOG_PROC LOG_DIAG LOG_CUR LOG_VAL
 #  Complete path name of the b6 input file
 INFILE_NAME=${INPUTDIR}/gm_b6inputfile.txt
 
-# Complete path to config file for assocload
-CONFIG_ASSOCLOAD=${ASSEMBLYSEQLOAD}/B6_assocload.config
-
-export INFILE_NAME CONFIG_ASSOCLOAD
-
 ###########################################################################
 #
 #  B6 assemblyseqload settings
@@ -113,10 +108,10 @@ SEQ_RELEASE_DATE=2017/07/01
 SEQ_RELEASE_NO="GRCm38"
 
 # Load's MGI_User login value for DB tables CreatedBy and ModifiedBy column
-JOBSTREAM=b6_assemblyseqload
+JOBSTREAM=B6_assemblyseqload
 
 # SEQ_Sequence Provider controlled vocab for MGI B6 
-SEQ_PROVIDER="MGI B6 Strain Gene Model"
+SEQ_PROVIDER="MGI C57BL/6J Strain Gene Model"
 
 # logical db name for this data provider
 SEQ_LOGICALDB="MGI Strain Gene"
