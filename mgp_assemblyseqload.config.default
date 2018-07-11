@@ -116,7 +116,7 @@ SEQ_RELEASE_NO="Ensembl Release 91"
 JOBSTREAM=mgp_assemblyseqload
 
 # SEQ_Sequence Provider controlled vocab for MGP
-SEQ_PROVIDER="MGP Strain Gene Model"
+SEQ_PROVIDER="Wellcome Sanger Institute's Mouse Genomes Project (MGP) Strain Gene Model"
 
 # logical db name for this data provider
 SEQ_LOGICALDB="Mouse Genome Project"
