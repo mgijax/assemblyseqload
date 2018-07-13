@@ -1,3 +1,9 @@
+TAG: assemblyseqload-tr12734-6
+DATE: 06/07/2018
+STAFF: sc
+CHANGES: TR12734/GF project
+1) update mgp_assemblyseqload.config.default:SEQ_RELEASE_NO MGP release number from 91 to 92
+
 TAG: assemblyseqload-tr12734-5
 TAG: assemblyseqload-tr12734-4
 TAG: assemblyseqload-tr12734-3

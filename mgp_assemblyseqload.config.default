@@ -110,7 +110,7 @@ export SEQ_ORGANISM SEQ_STRAIN SEQ_TISSUE SEQ_AGE SEQ_GENDER SEQ_CELLLINE
 SEQ_RELEASE_DATE=2017/07/01
 
 # for the sequence version
-SEQ_RELEASE_NO="Ensembl Release 91"
+SEQ_RELEASE_NO="Ensembl Release 92"
 
 # Load's MGI_User login value for DB tables CreatedBy and ModifiedBy column
 JOBSTREAM=mgp_assemblyseqload
