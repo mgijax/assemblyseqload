@@ -1,8 +1,40 @@
+TAG: assemblyseqload-6-0-13-1
+DATE: 09/04/2018
+STAFF: lec 
+TR12734/GenFeVah merge
+
 TAG: assemblyseqload-6-0-12-2
 DATE: 05/09/2018
 STAFF: lec 
 CHANGES:
 1) TR12859/Ensembl 92
+
+TAG: assemblyseqload-tr12734-6
+DATE: 06/07/2018
+STAFF: sc
+CHANGES: TR12734/GF project
+1) update mgp_assemblyseqload.config.default:SEQ_RELEASE_NO MGP release number from 91 to 92
+
+TAG: assemblyseqload-tr12734-5
+TAG: assemblyseqload-tr12734-4
+TAG: assemblyseqload-tr12734-3
+DATE: 06/07/2018
+STAFF: sc
+CHANGES: TR12734/GF project
+1) b6_assemblyseqload.config.default - fixed jobstream name b6 to B6
+   CONFIG_ASSOCLOAD=${ASSEMBLYSEQLOAD}/B6_assocload.config
+2) updated SEQ_PROVIDER to specify strain
+ 
+TAG: assemblyseqload-tr12734-2
+DATE: 06/02/2018
+STAFF: sc
+CHANGES: TR12734/GF project
+1) fixed config bugs - B6 JNUM and SEQ_RELEASE_NO
+
+TAG: assemblyseqload-tr12734-1
+DATE: 06/01/2018
+STAFF: sc
+CHANGES: TR12734/GF project
 
 TAG: assemblyseqload-6-0-12-1
 DATE: 03/07/2018

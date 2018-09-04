@@ -1,0 +1,181 @@
+#format: sh
+#
+#  mgp_assemblyseqload.config
+#
+#  This file sets up environment variables that are needed for the
+#  MGP Assembly Sequence and Coordinate Loads
+#
+# The following config settings can change between loads:
+# 1) SEQ_RELEASE_DATE
+# 2) SEQ_RELEASE_NO (when new assembly)
+# 3) COORD_VERSION (when new assembly)
+#
+# default is true for the following
+# 1) load associations (ASSOC_JNUMBER) - may want to make false during testing
+#
+# default is false for the following - may want to make true during testing
+# 1) load sequence coordinate cache table (OK_LOAD_SEQ_CACHE_TABLES)
+# 2) load marker cache tables (OK_LOAD_MRK_CACHE_TABLES)
+###########################################################################
+
+###########################################################################
+#
+#  LOAD SPECIFIC SETTINGS
+#
+###########################################################################
+
+# Full path to dir containing MGP input files - note
+# these are created by the strainmarkerload
+INPUTDIR=${DATALOADSOUTPUT}/mgi/strainmarkerload/output
+
+# Full path the the logs, reports, and archive directories
+FILEDIR=${DATALOADSOUTPUT}/assembly/mgpseqload
+
+export INPUTDIR FILEDIR
+
+# Full path the the logs, reports, and archive directories
+LOGDIR=${FILEDIR}/logs
+RPTDIR=${FILEDIR}/reports
+OUTPUTDIR=${FILEDIR}/output
+ARCHIVEDIR=${FILEDIR}/archive
+
+export LOGDIR RPTDIR OUTPUTDIR ARCHIVEDIR
+
+#  Complete path name of the log files
+LOG_PROC=${LOGDIR}/assemblyseqload.proc.log
+LOG_DIAG=${LOGDIR}/assemblyseqload.diag.log
+LOG_CUR=${LOGDIR}/assemblyseqload.cur.log
+LOG_VAL=${LOGDIR}/assemblyseqload.val.log
+
+export LOG_PROC LOG_DIAG LOG_CUR LOG_VAL
+
+#  Complete path name of the mgp input file
+INFILE_NAME=${INPUTDIR}/gm_mgpinputfile.txt
+
+# Complete path to config file for assocload
+CONFIG_ASSOCLOAD=${ASSEMBLYSEQLOAD}/mgp_assocload.config
+
+export INFILE_NAME CONFIG_ASSOCLOAD
+
+###########################################################################
+#
+#  MGP assemblyseqload settings
+#
+###########################################################################
+
+# true if a virtual (computationally derived) sequence
+SEQ_VIRTUAL=true
+
+# Ensembl sequence type
+SEQ_TYPE=DNA
+
+# Ensembl sequence quality
+SEQ_QUALITY=High
+
+# MGP jnumber for the sequence load
+SEQ_JNUMBER=J:259852
+
+export SEQ_VIRTUAL SEQ_TYPE SEQ_QUALITY SEQ_JNUMBER
+
+# The flavor of assocload we are running
+ASSOCLOADER_SH=${ASSOCLOAD}/bin/AssocLoad2.sh
+
+# set to '0' (zero) as we want to load this from the straingenemodelload
+# because we do not want to run the chromosome check
+ASSOC_JNUMBER=0
+
+ASSOC_OBJECTTYPE="Strain Marker"
+
+export ASSOCLOADER_SH ASSOC_JNUMBER ASSOC_OBJECTTYPE
+
+# load the sequence coordinate cache table?
+OK_LOAD_SEQ_CACHE_TABLES=false
+
+# Load marker cache tables? If true, only loads if we load associations
+OK_LOAD_MRK_CACHE_TABLES=false
+
+export OK_LOAD_SEQ_CACHE_TABLES OK_LOAD_MRK_CACHE_TABLES
+
+# source information
+SEQ_ORGANISM="mouse, laboratory"
+SEQ_STRAIN=C57BL/6J
+SEQ_TISSUE="Not Specified"
+SEQ_AGE="Not Specified"
+SEQ_GENDER=Pooled
+SEQ_CELLLINE="Not Specified"
+
+export SEQ_ORGANISM SEQ_STRAIN SEQ_TISSUE SEQ_AGE SEQ_GENDER SEQ_CELLLINE
+
+# Ensembl release date yyyy/mm/dd
+SEQ_RELEASE_DATE=2017/07/01
+
+# for the sequence version
+SEQ_RELEASE_NO="Ensembl Release 92"
+
+# Load's MGI_User login value for DB tables CreatedBy and ModifiedBy column
+JOBSTREAM=mgp_assemblyseqload
+
+# SEQ_Sequence Provider controlled vocab for MGP
+SEQ_PROVIDER="Wellcome Sanger Institute's Mouse Genomes Project (MGP) Strain Gene Model"
+
+# logical db name for this data provider
+SEQ_LOGICALDB="Mouse Genome Project"
+
+export SEQ_RELEASE_DATE SEQ_RELEASE_NO JOBSTREAM SEQ_PROVIDER SEQ_LOGICALDB
+
+# MGI type name of the feature
+# e.g. 'Sequence' or 'Marker'
+COORD_FEATURE_MGITYPE=Sequence
+
+# add or  delete_reload
+COORD_LOAD_MODE=delete_reload
+
+# the interpreter to use
+SEQ_INTERPRETER=org.jax.mgi.shr.dla.input.mgs.MGSAssemblyFormatInterpreter
+
+export COORD_FEATURE_MGITYPE COORD_LOAD_MODE SEQ_INTERPRETER
+
+############################################################################
+#
+# ensembl coordload settings
+#
+###########################################################################
+
+# Java classes
+COORD_INTERPRETER=org.jax.mgi.shr.dla.input.mgs.MGSCoordinateFormatInterpreter
+COORD_PROCESSOR=org.jax.mgi.dbs.mgd.loads.Coord.ChromosomeCoordMapProcessor
+
+export COORD_INTERPRETER COORD_PROCESSOR
+
+# logical db name for this data provider
+COORD_LOGICALDB=${SEQ_LOGICALDB}
+
+# name of organism whose coordinates we are loading
+COORD_ORGANISM=${SEQ_ORGANISM}
+
+# version of the coordinate load
+COORD_VERSION=${SEQ_RELEASE_NO}
+
+# coordinate map collection to which this load belongs
+COORD_COLLECTION_NAME="Mouse Genome Project"
+
+# abbreviation for the coordinate collection
+# if no value assigned will be same as COORD_COLLECTION
+COORD_COLLECTION_ABBREV="MGP"
+
+# MGI type name of the feature
+COORD_FEATURE_MGITYPE=Sequence
+
+export COORD_LOGICALDB COORD_ORGANISM COORD_VERSION
+export COORD_COLLECTION_NAME COORD_COLLECTION_ABBREV COORD_FEATURE_MGITYPE
+
+###########################################################################
+#
+#  MISCELLANEOUS SETTINGS
+#
+###########################################################################
+#  The name of the load for the subject of an email notification
+MAIL_LOADNAME="MGP Assembly Load"
+
+export MAIL_LOADNAME
+

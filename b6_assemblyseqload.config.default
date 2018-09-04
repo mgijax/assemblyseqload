@@ -1,15 +1,14 @@
 #format: sh
 #
-#  vega_assemblyseqload.config.default
+#  b6_assemblyseqload.config
 #
 #  This file sets up environment variables that are needed for the
-#  VEGA Assembly Sequence and Coordinate Loads
+#  MGI B6 Assembly Sequence and Coordinate Loads
 #
-# The following config settings change between loads:
+# The following config settings can change between loads:
 # 1) SEQ_RELEASE_DATE
-# The following config settings change when there is a new genome build
-# 1) SEQ_RELEASE_NO
-# 2) COORD_VERSION
+# 2) SEQ_RELEASE_NO (when new assembly)
+# 3) COORD_VERSION (when new assembly)
 #
 # default is true for the following
 # 1) load associations (ASSOC_JNUMBER) - may want to make false during testing
@@ -25,11 +24,12 @@
 #
 ###########################################################################
 
-# Full path to dir containing assembly input files - 
-INPUTDIR=${DATALOADSOUTPUT}/mgi/genemodelload/output
+# Full path to dir containing MGI B6 input file - note
+# these are created by the strainmarkerload
+INPUTDIR=${DATALOADSOUTPUT}/mgi/strainmarkerload/output
 
 # Full path the the logs, reports, and archive directories
-FILEDIR=${DATALOADSOUTPUT}/assembly/vegaseqload
+FILEDIR=${DATALOADSOUTPUT}/assembly/b6seqload
 
 export INPUTDIR FILEDIR
 
@@ -49,43 +49,37 @@ LOG_VAL=${LOGDIR}/assemblyseqload.val.log
 
 export LOG_PROC LOG_DIAG LOG_CUR LOG_VAL
 
-#  Complete path name of the vega input file
-INFILE_NAME=${INPUTDIR}/vega_genemodels_load.txt
-
-# Complete path to config file for assocload
-CONFIG_ASSOCLOAD=${ASSEMBLYSEQLOAD}/vega_assocload.config
-
-export INFILE_NAME CONFIG_ASSOCLOAD
+#  Complete path name of the b6 input file
+INFILE_NAME=${INPUTDIR}/gm_b6inputfile.txt
 
 ###########################################################################
 #
-#  vega assemblyseqload settings
+#  B6 assemblyseqload settings
 #
 ###########################################################################
 
 # true if a virtual (computationally derived) sequence
 SEQ_VIRTUAL=true
 
-# VEGA sequence type
+# Ensembl sequence type
 SEQ_TYPE=DNA
 
-# VEGA sequence quality
+# Ensembl sequence quality
 SEQ_QUALITY=High
 
-# jnumber for the sequence load
-SEQ_JNUMBER=J:109762
+# MGI B6 jnumber for the sequence load
+SEQ_JNUMBER=J:260092
 
 export SEQ_VIRTUAL SEQ_TYPE SEQ_QUALITY SEQ_JNUMBER
 
 # The flavor of assocload we are running
 ASSOCLOADER_SH=${ASSOCLOAD}/bin/AssocLoad2.sh
 
-# jnumber for the accession association load
-# set to '0' (zero) if you DO NOT want to run the association load
-ASSOC_JNUMBER=J:109762
-#ASSOC_JNUMBER=0
+# set to '0' (zero) as we want to load this from the straingenemodelload
+# because we do not want to run the chromosome check
+ASSOC_JNUMBER=0
 
-ASSOC_OBJECTTYPE=Marker
+ASSOC_OBJECTTYPE="Strain Marker"
 
 export ASSOCLOADER_SH ASSOC_JNUMBER ASSOC_OBJECTTYPE
 
@@ -107,20 +101,20 @@ SEQ_CELLLINE="Not Specified"
 
 export SEQ_ORGANISM SEQ_STRAIN SEQ_TISSUE SEQ_AGE SEQ_GENDER SEQ_CELLLINE
 
-# VEGA release date yyyy/mm/dd
-SEQ_RELEASE_DATE=2016/09/13
+# Ensembl release date yyyy/mm/dd
+SEQ_RELEASE_DATE=2017/07/01
 
 # for the sequence version
 SEQ_RELEASE_NO="GRCm38"
 
 # Load's MGI_User login value for DB tables CreatedBy and ModifiedBy column
-JOBSTREAM=vega_assemblyseqload
+JOBSTREAM=B6_assemblyseqload
 
-# SEQ_Sequence Provider controlled vocab for VEGA 
-SEQ_PROVIDER="VEGA Gene Model"
+# SEQ_Sequence Provider controlled vocab for MGI B6 
+SEQ_PROVIDER="MGI C57BL/6J Strain Gene Model"
 
 # logical db name for this data provider
-SEQ_LOGICALDB="VEGA Gene Model"
+SEQ_LOGICALDB="MGI Strain Gene"
 
 export SEQ_RELEASE_DATE SEQ_RELEASE_NO JOBSTREAM SEQ_PROVIDER SEQ_LOGICALDB
 
@@ -134,11 +128,11 @@ COORD_LOAD_MODE=delete_reload
 # the interpreter to use
 SEQ_INTERPRETER=org.jax.mgi.shr.dla.input.mgs.MGSAssemblyFormatInterpreter
 
-export COORD_FEATURE_MGITYPE COORD_LOAD_MODE SEQ_INTERPRETER 
+export COORD_FEATURE_MGITYPE COORD_LOAD_MODE SEQ_INTERPRETER
 
 ############################################################################
 #
-# vega coordload settings
+# ensembl coordload settings
 #
 ###########################################################################
 
@@ -158,11 +152,11 @@ COORD_ORGANISM=${SEQ_ORGANISM}
 COORD_VERSION="GRCm38"
 
 # coordinate map collection to which this load belongs
-COORD_COLLECTION_NAME="VEGA Gene Model"
+COORD_COLLECTION_NAME="MGI B6 Strain Gene Model"
 
 # abbreviation for the coordinate collection
 # if no value assigned will be same as COORD_COLLECTION
-COORD_COLLECTION_ABBREV="VEGA"
+COORD_COLLECTION_ABBREV="MGI B6 Strain Gene Model"
 
 # MGI type name of the feature
 COORD_FEATURE_MGITYPE=Sequence
@@ -176,6 +170,7 @@ export COORD_COLLECTION_NAME COORD_COLLECTION_ABBREV COORD_FEATURE_MGITYPE
 #
 ###########################################################################
 #  The name of the load for the subject of an email notification
-MAIL_LOADNAME="VEGA Assembly Load"
+MAIL_LOADNAME="MGI B6 Assembly Load"
 
 export MAIL_LOADNAME
+
