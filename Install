@@ -121,6 +121,11 @@ else
     installFailed
 fi
 
+#
+# run DLAInstall for mgp seqload
+#
+${DLAINSTALL} ${DEV}
+
 # source common config again
 . ${COMMON_CONFIG}
 
@@ -135,7 +140,7 @@ else
 fi
 
 #
-# run DLAInstall for mgp seqload
+# run DLAInstall for b6 seqload
 #
 ${DLAINSTALL} ${DEV}
 
