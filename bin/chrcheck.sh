@@ -108,7 +108,7 @@ echo "MGD_DBNAME: ${MGD_DBNAME}"
 ##################################################################
 
 echo "Running chrcheck.py" | tee -a ${LOG}
-chrcheck.py | tee -a ${LOG} 
+${PYTHON} chrcheck.py | tee -a ${LOG} 
 STAT=$?
 checkStatus ${STAT} "chrcheck.py"
 

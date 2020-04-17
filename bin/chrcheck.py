@@ -1,5 +1,3 @@
-#!/usr/local/bin/python
-
 '''
 #
 # Purpose:
@@ -17,7 +15,6 @@
 
 import sys
 import os
-import string
 import db
 
 TAB = '\t'
@@ -37,14 +34,14 @@ db.useOneConnection(1)
 results = db.sql('''select _LogicalDB_key from ACC_LogicalDB where name = '%s' ''' % logicalDB, 'auto')
 ldbKey = results[0]['_LogicalDB_key']
 if ldbKey == '':
-    print 'Invalid Coordinate LogicalDB name'
+    print('Invalid Coordinate LogicalDB name')
     exit(1)
 
 # Resolve collection name to key
 results = db.sql('''select _Collection_key from MAP_Coord_Collection where name = '%s' ''' % collection, 'auto')
 collKey = results[0]['_Collection_key']
 if collKey == '':
-    print 'Invalid Coordinate Collection name'
+    print('Invalid Coordinate Collection name')
     exit(1)
 
 # query for inconsistencies
