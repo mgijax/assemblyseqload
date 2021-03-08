@@ -102,10 +102,10 @@ SEQ_CELLLINE="Not Specified"
 export SEQ_ORGANISM SEQ_STRAIN SEQ_TISSUE SEQ_AGE SEQ_GENDER SEQ_CELLLINE
 
 # Ensembl release date yyyy/mm/dd
-SEQ_RELEASE_DATE=2017/07/01
+SEQ_RELEASE_DATE=2021/02/15
 
 # for the sequence version
-SEQ_RELEASE_NO="GRCm38"
+SEQ_RELEASE_NO="GRCm39"
 
 # Load's MGI_User login value for DB tables CreatedBy and ModifiedBy column
 JOBSTREAM=B6_assemblyseqload
@@ -149,7 +149,7 @@ COORD_LOGICALDB=${SEQ_LOGICALDB}
 COORD_ORGANISM=${SEQ_ORGANISM}
 
 # version of the coordinate load
-COORD_VERSION="GRCm38"
+COORD_VERSION="GRCm39"
 
 # coordinate map collection to which this load belongs
 COORD_COLLECTION_NAME="MGI B6 Strain Gene Model"
