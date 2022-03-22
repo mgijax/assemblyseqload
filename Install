@@ -34,12 +34,16 @@ cd `dirname $0`
 
 # establish the config file names
 ENSEMBL_CONFIG=ensembl_assemblyseqload.config
+ENSEMBLREG_CONFIG=ensemblreg_assemblyseqload.config
 NCBI_CONFIG=ncbi_assemblyseqload.config 
 MGP_CONFIG=mgp_assemblyseqload.config
 MGI_CONFIG=b6_assemblyseqload.config
+VISTAREG_CONFIG=vistareg_assemblyseqload.config
 
 ENSEMBL_ASSOCCONFIG=ensembl_assocload.config
 NCBI_ASSOCCONFIG=ncbi_assocload.config
+ENSEMBLREG_ASSOCCONFIG=ensemblreg_assocload.config
+VISTAREG_ASSOCCONFIG=vistareg_assocload.config
 
 COMMON_CONFIG=assembly_common.config
 
@@ -185,6 +189,95 @@ fi
 
 #
 # run DLAInstall for ncbi assocload
+#
+${DLAINSTALL} ${DEV}
+
+#
+# Ensembl Reg Sequence Load
+#
+
+# source common config again
+. ${COMMON_CONFIG}
+
+# Make sure ensembl config file exists and source it
+if [ -r ${ENSEMBLREG_CONFIG} ]
+then
+    echo "Source ${ENSEMBLREG_CONFIG}"
+    . ${ENSEMBLREG_CONFIG}
+else
+    echo "Cannot source configuration file: ${ENSEMBLREG_CONFIG}"
+    installFailed
+fi
+
+#
+# run DLAInstall for ensembl seqload
+#
+echo 'running DLAINSTALL'
+${DLAINSTALL} ${DEV}
+
+#
+# Ensembl Assocload
+#
+
+# source common config again
+. ${COMMON_CONFIG}
+
+# Make sure ensembl config file exists and source it
+if [ -r ${ENSEMBLREG_ASSOCCONFIG} ]
+then
+    echo "Source ${ENSEMBLREG_ASSOCCONFIG}"
+    . ${ENSEMBLREG_ASSOCCONFIG}
+else
+    echo "Cannot source configuration file: ${ENSEMBLREG_ASSOCCONFIG}"
+    installFailed
+fi
+
+#
+# run DLAInstall for ensembl assocload
+#
+${DLAINSTALL} ${DEV}
+
+#
+# VISTA Reg Sequence Load
+#
+
+# source common config again
+. ${COMMON_CONFIG}
+
+# Make sure ensembl config file exists and source it
+if [ -r ${VISTAREG_CONFIG} ]
+then
+    echo "Source ${VISTAREG_CONFIG}"
+    . ${VISTAREG_CONFIG}
+else
+    echo "Cannot source configuration file: ${VISTAREG_CONFIG}"
+    installFailed
+fi
+
+#
+# run DLAInstall for ncbi assocload
+#
+${DLAINSTALL} ${DEV}
+
+#
+# VISTA Assocload
+#
+
+# source common config again
+. ${COMMON_CONFIG}
+
+# Make sure ensembl config file exists and source it
+if [ -r ${VISTAREG_ASSOCCONFIG} ]
+then
+    echo "Source ${VISTAREG_ASSOCCONFIG}"
+    . ${VISTAREG_ASSOCCONFIG}
+else
+    echo "Cannot source configuration file: ${VISTAREG_ASSOCCONFIG}"
+    installFailed
+fi
+
+#
+# run DLAInstall for ensembl assocload
 #
 ${DLAINSTALL} ${DEV}
 
