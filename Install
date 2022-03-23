@@ -34,10 +34,10 @@ cd `dirname $0`
 
 # establish the config file names
 ENSEMBL_CONFIG=ensembl_assemblyseqload.config
-ENSEMBLREG_CONFIG=ensemblreg_assemblyseqload.config
 NCBI_CONFIG=ncbi_assemblyseqload.config 
 MGP_CONFIG=mgp_assemblyseqload.config
 MGI_CONFIG=b6_assemblyseqload.config
+ENSEMBLREG_CONFIG=ensemblreg_assemblyseqload.config
 VISTAREG_CONFIG=vistareg_assemblyseqload.config
 
 ENSEMBL_ASSOCCONFIG=ensembl_assocload.config
