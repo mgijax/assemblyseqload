@@ -1,7 +1,8 @@
-TAG: assemblyseqload-????
-DATE:
-STAFF: 
+TAG: assemblyseqload-6-0-22-4
+DATE: 04/26/2022
+STAFF: sc
 CHANGES:
+wts2-1050/Florida Too Project
 1. assembly_common.config.default Added SEQ_REPEATS_OK=false
     override in ncbi config so NCBI sequences can have same NCBI ID
 2. ./ncbi_assemblyseqload.config override: SEQ_REPEATS_OK=true
