@@ -1,2 +1,2 @@
-assembly_common.config
+*.config
 *.log
