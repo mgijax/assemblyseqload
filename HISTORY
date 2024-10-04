@@ -1,4 +1,11 @@
-TAG: genemodelload-6-0-24-1
+TAG: assemblyseqload-6-0-24-2
+DATE: 10/04/2024
+STAFF: lec
+CHANGES: 
+wts2-1543/e4g-17/VISTA load 2024-08
+#       modified:   vistareg_assemblyseqload.config
+
+TAG: assemblyseqload-6-0-24-1
 DATE: 07/25/2024
 STAFF: lec
 CHANGES: 
