@@ -1,9 +1,11 @@
 TAG: assemblyseqload-6-0-25-1
-DATE: 01/08/2025
+DATE: 03/12/2025
 STAFF: lec
 CHANGES: 
 wts2-1591/e4g-93/ENSEMBL gene 113
 #       modified:   ensembl_assemblyseqload.config
+#       modified:   ensemblreg_assemblyseqload.config
+#       modified:   ensemblreg_assocload.config
 
 TAG: assemblyseqload-6-0-24-3
 TAG: assemblyseqload-6-0-24-2
