@@ -1,11 +1,30 @@
-TAG: genemodelload-6-0-25-1
+TAG: assemblyseqload-6-0-25-3
 DATE: 05/28/2025
 STAFF: lec
 CHANGES: 
 wts2-1670/e4g-268/ENSEMBL 114
 #       modified:   ensembl_assemblyseqload.config
 
-TAG: genemodelload-6-0-24-1
+TAG: assemblyseqload-6-0-25-2
+TAG: assemblyseqload-6-0-25-1
+DATE: 03/12/2025
+STAFF: lec
+CHANGES: 
+wts2-1591/e4g-93/ENSEMBL gene 113
+#       modified:   ensembl_assemblyseqload.config
+#       modified:   ensemblreg_assemblyseqload.config
+#       modified:   ensemblreg_assocload.config
+
+TAG: assemblyseqload-6-0-24-3
+TAG: assemblyseqload-6-0-24-2
+DATE: 10/04/2024
+STAFF: lec
+CHANGES: 
+wts2-1543/e4g-17/VISTA load 2024-08
+#       modified:   vistareg_assemblyseqload.config
+
+TAG: assemblyseqload-6-0-24-1
+>>>>>>> 959bbdc64150edd9bef9fb7a53f52d06f48e4661
 DATE: 07/25/2024
 STAFF: lec
 CHANGES: 
