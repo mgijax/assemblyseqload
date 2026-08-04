@@ -73,7 +73,7 @@ SEQ_TYPE=DNA
 SEQ_QUALITY=High
 
 # MGP jnumber for the sequence load
-SEQ_JNUMBER=J:259852
+SEQ_JNUMBER=J:389486
 
 export SEQ_VIRTUAL SEQ_TYPE SEQ_QUALITY SEQ_JNUMBER
 
@@ -107,19 +107,19 @@ SEQ_CELLLINE="Not Specified"
 export SEQ_ORGANISM SEQ_STRAIN SEQ_TISSUE SEQ_AGE SEQ_GENDER SEQ_CELLLINE
 
 # Ensembl release date yyyy/mm/dd
-SEQ_RELEASE_DATE=2017/07/01
+SEQ_RELEASE_DATE=2026/06/09
 
 # for the sequence version
-SEQ_RELEASE_NO="Ensembl Release 92"
+SEQ_RELEASE_NO="Ensembl Release 116"
 
 # Load's MGI_User login value for DB tables CreatedBy and ModifiedBy column
 JOBSTREAM=mgp_assemblyseqload
 
 # SEQ_Sequence Provider controlled vocab for MGP
-SEQ_PROVIDER="Wellcome Sanger Institute's Mouse Genomes Project (MGP) Strain Gene Model"
+SEQ_PROVIDER="Ensembl Gene Model"
 
 # logical db name for this data provider
-SEQ_LOGICALDB="Mouse Genome Project"
+SEQ_LOGICALDB="Ensembl Gene Model"
 
 export SEQ_RELEASE_DATE SEQ_RELEASE_NO JOBSTREAM SEQ_PROVIDER SEQ_LOGICALDB
 
@@ -157,7 +157,7 @@ COORD_ORGANISM=${SEQ_ORGANISM}
 COORD_VERSION=${SEQ_RELEASE_NO}
 
 # coordinate map collection to which this load belongs
-COORD_COLLECTION_NAME="Mouse Genome Project"
+COORD_COLLECTION_NAME="Ensembl Gene Model"
 
 # abbreviation for the coordinate collection
 # if no value assigned will be same as COORD_COLLECTION
