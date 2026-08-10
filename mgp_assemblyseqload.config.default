@@ -116,7 +116,7 @@ SEQ_RELEASE_NO="Ensembl Release 116"
 JOBSTREAM=mgp_assemblyseqload
 
 # SEQ_Sequence Provider controlled vocab for MGP
-SEQ_PROVIDER="Ensembl Gene Model"
+SEQ_PROVIDER="Ensembl Strain Gene Model"
 
 # logical db name for this data provider
 SEQ_LOGICALDB="Ensembl Gene Model"
