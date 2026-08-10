@@ -157,7 +157,7 @@ COORD_ORGANISM=${SEQ_ORGANISM}
 COORD_VERSION=${SEQ_RELEASE_NO}
 
 # coordinate map collection to which this load belongs
-COORD_COLLECTION_NAME="Ensembl Gene Model"
+COORD_COLLECTION_NAME="Ensembl Strain Gene Model"
 
 # abbreviation for the coordinate collection
 # if no value assigned will be same as COORD_COLLECTION
